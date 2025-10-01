@@ -334,6 +334,7 @@ nav {
     font-size: 2rem;
     line-height: 1.8;
     color: var(--text-color);
+    align-items: left;
 }
 
 .personal-info {
