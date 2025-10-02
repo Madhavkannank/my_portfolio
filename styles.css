@@ -111,6 +111,9 @@ nav {
     color: var(--primary-color);
     letter-spacing: 0.5px;
     transition: var(--transition);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .logo:hover {
@@ -201,6 +204,10 @@ nav {
     font-size: 3.5rem;
     margin-bottom: 1rem;
     line-height: 1.2;
+}
+
+.hero h1 .highlight {
+    white-space: nowrap;
 }
 
 .hero h2 {
@@ -295,7 +302,6 @@ nav {
     outline: 0;
     padding: 0;
     margin: 0;
-    vertical-align: middle;
     max-width: 100%;
 }
 
@@ -331,10 +337,9 @@ nav {
 
 .about-text p {
     margin-bottom: 1.5rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-color);
-    align-items: left;
 }
 
 .personal-info {
@@ -380,68 +385,6 @@ nav {
     box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
 }
 
-.about-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.about-img {
-    flex: 1;
-    text-align: center;
-}
-
-.about-img img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.about-text {
-    text-align: center;
-    max-width: 800px;
-}
-
-.about-text p {
-    margin-bottom: 1.5rem;
-    color: var(--light-text);
-    line-height: 1.8;
-}
-
-.personal-info {
-    margin: 2rem 0;
-}
-
-.info-item {
-    margin-bottom: 1rem;
-    display: flex;
-    gap: 1rem;
-}
-
-.info-item span {
-    font-weight: 600;
-    color: var(--text-color);
-    min-width: 100px;
-}
-
-.download-cv {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.8rem 1.8rem;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 5px;
-    transition: var(--transition);
-}
-
-.download-cv:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
-}
 
 /* Experience Section */
 .experience {
@@ -957,6 +900,11 @@ footer {
 }
 
 @media (max-width: 992px) {
+    .logo {
+        font-size: 1.8rem;
+        max-width: 200px;
+    }
+    
     .about-content {
         flex-direction: column;
         align-items: center;
@@ -967,6 +915,19 @@ footer {
         flex: 0 0 auto;
         width: 280px;
         margin-bottom: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .about-img img {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        display: block;
+        margin: 0 auto;
     }
 
     .personal-info {
@@ -976,8 +937,21 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .logo {
+        font-size: 1.5rem;
+        max-width: 180px;
+    }
+    
+    nav {
+        padding: 1rem 1.5rem;
+    }
+    
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+    }
+    
+    .hero h1 .highlight {
+        white-space: nowrap;
     }
 
     .hero h2 {
@@ -990,6 +964,43 @@ footer {
 
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .about-img {
+        width: 220px;
+    }
+    
+    .about-img img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.3rem;
+        max-width: 150px;
+    }
+    
+    nav {
+        padding: 1rem;
+    }
+    
+    .about-img {
+        width: 180px;
+    }
+    
+    .about-img img {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero h1 .highlight {
+        white-space: nowrap;
     }
 }
 
