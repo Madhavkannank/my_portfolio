@@ -106,8 +106,8 @@ nav {
 }
 
 .logo {
-    font-size: 2.2rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 500;
     color: var(--primary-color);
     letter-spacing: 0.5px;
     transition: var(--transition);
