@@ -109,11 +109,8 @@ nav {
     font-size: 2rem;
     font-weight: 500;
     color: var(--primary-color);
-    letter-spacing: 0.5px;
     transition: var(--transition);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .logo:hover {
