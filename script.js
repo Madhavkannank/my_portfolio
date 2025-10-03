@@ -43,6 +43,43 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Update copyright year
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+// Update icon based on current theme
+function updateThemeIcon(theme) {
+    if (theme === 'dark') {
+        themeIcon.className = 'fas fa-sun';
+    } else {
+        themeIcon.className = 'fas fa-moon';
+    }
+}
+
+// Initialize icon
+updateThemeIcon(currentTheme);
+
+// Theme toggle event listener
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Update theme
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+    
+    // Add a subtle animation to the toggle button
+    themeToggle.style.transform = 'rotate(360deg)';
+    setTimeout(() => {
+        themeToggle.style.transform = '';
+    }, 300);
+});
+
 // Add scroll animation (re-triggerable with enhanced animations)
 const animateOnScroll = () => {
     const elements = document.querySelectorAll('.project-card, .skill-item, .contact-item, .timeline-item, .achievement-card, .section-title, .hero-content, .about-img, .about-text');
