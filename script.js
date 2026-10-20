@@ -40,6 +40,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Deep link / URL param scroll handler
+const checkInitialScroll = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetId = urlParams.get('scroll') || (window.location.hash ? window.location.hash.substring(1) : null);
+    if (targetId) {
+        const el = document.getElementById(targetId);
+        if (el) {
+            el.scrollIntoView();
+        }
+    }
+};
+checkInitialScroll();
+window.addEventListener('DOMContentLoaded', checkInitialScroll);
+
 // Update copyright year
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -47,8 +61,8 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle.querySelector('i');
 
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
+// Check for saved theme preference or default to dark mode
+const currentTheme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', currentTheme);
 
 // Update icon based on current theme
@@ -80,85 +94,25 @@ themeToggle.addEventListener('click', () => {
     }, 300);
 });
 
-// Add scroll animation (re-triggerable with enhanced animations)
+// Lightweight scroll reveals for headings and cards
 const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.project-card, .skill-category, .contact-item, .timeline-item, .achievement-card, .section-title, .hero-content, .about-img, .about-text');
+    const elements = document.querySelectorAll('.flagship-card, .secondary-card, .os-card, .ledger-row, .credential-featured-card, .domains-overview-card, .skill-category, .section-editorial-header');
     const windowHeight = window.innerHeight;
 
-    elements.forEach((element, index) => {
+    elements.forEach((element) => {
         const rect = element.getBoundingClientRect();
-        const inView = rect.top < windowHeight - 50 && rect.bottom > 50;
-
-        if (inView && !element.classList.contains('animated')) {
-            // Remove any existing transforms before animating
-            element.style.transform = '';
-            
-            // Add different animation classes based on element type
-            if (element.classList.contains('section-title')) {
-                element.classList.add('slide-in-down', 'animated');
-            } else if (element.classList.contains('hero-content')) {
-                element.classList.add('fade-in-up', 'animated');
-            } else if (element.classList.contains('about-img')) {
-                element.classList.add('fade-in-left', 'animated');
-            } else if (element.classList.contains('about-text')) {
-                element.classList.add('fade-in-right', 'animated');
-            } else if (element.classList.contains('timeline-item')) {
-                // Alternate timeline items
-                if (index % 2 === 0) {
-                    element.classList.add('fade-in-left', 'animated');
-                } else {
-                    element.classList.add('fade-in-right', 'animated');
-                }
-            } else if (element.classList.contains('achievement-card')) {
-                element.classList.add('bounce-in', 'animated');
-            } else {
-                element.classList.add('fade-in-up', 'animated');
-            }
-            
-            // Add minimal staggered delay
-            element.style.animationDelay = `${(index % 5) * 0.05}s`;
+        const inView = rect.top < windowHeight - 40 && rect.bottom > 40;
+        if (inView) {
+            element.classList.add('in-view');
         }
     });
 };
 
-// Set initial styles for animation
 document.addEventListener('DOMContentLoaded', () => {
-    // Set initial opacity for all animated elements
-    const animatedElements = document.querySelectorAll('.project-card, .skill-category, .contact-item, .timeline-item, .achievement-card, .section-title, .hero-content, .about-img, .about-text');
-    animatedElements.forEach(element => {
-        element.style.opacity = '0';
-    });
-
-    // Add special animations for navigation
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach((link, index) => {
-        link.style.opacity = '0';
-        link.style.transform = 'translateY(-20px)';
-        setTimeout(() => {
-            link.style.transition = 'all 0.3s ease';
-            link.style.opacity = '1';
-            link.style.transform = 'translateY(0)';
-        }, index * 50 + 300);
-    });
-
-    // Animate logo
-    const logo = document.querySelector('.logo');
-    if (logo) {
-        logo.style.opacity = '0';
-        logo.style.transform = 'scale(0.8)';
-        setTimeout(() => {
-            logo.style.transition = 'all 0.4s ease';
-            logo.style.opacity = '1';
-            logo.style.transform = 'scale(1)';
-        }, 100);
-    }
-
-    // Initial check for elements in viewport
     setTimeout(animateOnScroll, 100);
 });
 
-// Check for elements in viewport on scroll
-window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('scroll', animateOnScroll, { passive: true });
 
 // Notification function
 function showNotification(message, type = 'success') {
@@ -272,48 +226,7 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Horizontal scroll for projects section
-let _hScrollHandler = null;
-
-function setupProjectsHScroll() {
-    const section = document.querySelector('#projects');
-    const track = document.querySelector('.projects-track');
-    if (!section || !track) return;
-
-    if (_hScrollHandler) {
-        window.removeEventListener('scroll', _hScrollHandler);
-        _hScrollHandler = null;
-    }
-
-    if (window.innerWidth < 768) {
-        section.style.height = '';
-        track.style.transform = '';
-        return;
-    }
-
-    const vh = window.innerHeight;
-    const maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth + 80);
-    section.style.height = `${vh + maxTranslate}px`;
-
-    // Ensure cards are visible (bypass the fade-in opacity:0 from scroll animations)
-    section.querySelectorAll('.project-card').forEach(card => {
-        card.style.opacity = '1';
-        card.style.animationDelay = '';
-        card.classList.add('animated');
-    });
-
-    _hScrollHandler = () => {
-        const rect = section.getBoundingClientRect();
-        const progress = Math.max(0, Math.min(-rect.top, maxTranslate));
-        track.style.transform = `translateX(-${progress}px)`;
-    };
-
-    window.addEventListener('scroll', _hScrollHandler, { passive: true });
-    _hScrollHandler();
-}
-
-document.addEventListener('DOMContentLoaded', setupProjectsHScroll);
-window.addEventListener('resize', setupProjectsHScroll);
+// Projects section uses fluid editorial showcase (no rigid horizontal track)
 
 // Back to top button
 const backToTop = document.getElementById('back-to-top');
@@ -353,6 +266,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Interactive Project Details Modal
 const projectDetails = {
+    'Jarvis Jr': {
+        title: 'Jarvis Jr — Personal AI Assistant & OS Automation Runtime',
+        subtitle: 'Layered Local-First AI Runtime with Supervisor-Worker Architecture',
+        stack: ['Python', 'AsyncIO', 'Multi-Agent', 'POSIX/Win32', 'Vector Memory', 'Sandboxing'],
+        highlights: [
+            'Layered modular architecture decoupling core orchestration (app/jarvis.py), semantic routing (core/router.py), and planning (agents/supervisor.py).',
+            'Dynamic task decomposition graph executing independent I/O workflows concurrently while maintaining strict serialized model inference.',
+            'Deterministic tool execution sandbox with strict privilege separation, argument validation, and structured error propagation.',
+            'Hardware-aware local execution engineered for 6GB VRAM bounds (RTX 3050) with cross-platform Linux & Windows runtimes.'
+        ],
+        github: 'https://github.com/Madhavkannank/juniorjarvis'
+    },
     'KCI': {
         title: 'KCI (Kandhari Construction Intelligence)',
         subtitle: 'Infrastructure Defect Detection & Severity Assessment System',
@@ -409,17 +334,6 @@ const projectDetails = {
         ],
         github: 'https://github.com/Madhavkannank/AURA_ECE'
     },
-    'CampusKaboom': {
-        title: 'CampusKaboom — Student Mentorship Platform',
-        subtitle: 'Peer-to-Peer Learning & Session Scheduling',
-        stack: ['React', 'Vite', 'Firebase', 'Tailwind CSS', 'WebSockets'],
-        highlights: [
-            'Peer-to-peer student mentor matching space featuring dual Student/Mentor mode switching.',
-            'Calendar booking engine for 1-on-1 sessions and real-time socket chat rooms.',
-            'Firebase Firestore database with granular security rules and authentication.'
-        ],
-        github: 'https://github.com/Madhavkannank/Campus-Kaboom'
-    },
     'Color App': {
         title: 'Color App — Theme & Palette Suggester',
         subtitle: 'Java Desktop Application with MySQL Storage',
@@ -435,14 +349,23 @@ const projectDetails = {
 
 // Modal Trigger Event Handlers
 document.addEventListener('click', (e) => {
-    const card = e.target.closest('.project-card');
-    if (card) {
-        const titleEl = card.querySelector('h3');
-        if (!titleEl) return;
-        const key = titleEl.textContent.trim();
+    const trigger = e.target.closest('.open-modal-btn');
+    if (trigger) {
+        const key = trigger.getAttribute('data-project');
         const info = projectDetails[key];
         if (info) {
             openProjectModal(info);
+        }
+        return;
+    }
+    const card = e.target.closest('.flagship-card, .secondary-card');
+    if (card && !e.target.closest('a') && !e.target.closest('button')) {
+        const titleEl = card.querySelector('.project-title, .sec-title');
+        if (!titleEl) return;
+        const text = titleEl.textContent.trim();
+        const key = Object.keys(projectDetails).find(k => text.includes(k));
+        if (key && projectDetails[key]) {
+            openProjectModal(projectDetails[key]);
         }
     }
 });
@@ -455,19 +378,25 @@ function openProjectModal(info) {
     if (!modalOverlay || !modalContent) return;
     
     modalContent.innerHTML = `
-        <h2 style="font-family: var(--font-heading); font-size: 1.75rem; color: var(--text-color); margin-bottom: 0.25rem;">${info.title}</h2>
-        <p style="color: var(--primary-color); font-weight: 600; font-size: 0.95rem; margin-bottom: 1.25rem;">${info.subtitle}</p>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--primary-color); font-weight: 700; letter-spacing: 0.1em;">// ARCHITECTURAL DOSSIER</span>
+        </div>
+        <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; color: var(--text-color); margin-bottom: 0.35rem; letter-spacing: -0.02em;">${info.title}</h2>
+        <p style="color: var(--secondary-color); font-weight: 600; font-size: 0.98rem; margin-bottom: 1.5rem;">${info.subtitle}</p>
         
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
-            ${info.stack.map(s => `<span style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-color); font-weight: 600; padding: 0.35rem 0.85rem; border-radius: 20px; font-size: 0.8rem;">${s}</span>`).join('')}
+        <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 1.75rem;">
+            ${info.stack.map(s => `<span style="background: var(--light-bg); border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-mono); font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.78rem;">${s}</span>`).join('')}
         </div>
         
-        <h4 style="color: var(--text-color); font-size: 1rem; margin-bottom: 0.75rem;">Key Architecture &amp; Highlights</h4>
-        <ul style="list-style: disc; padding-left: 1.25rem; color: var(--light-text); font-size: 0.92rem; line-height: 1.7; margin-bottom: 2rem;">
-            ${info.highlights.map(h => `<li style="margin-bottom: 0.5rem;">${h}</li>`).join('')}
+        <h4 style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary-color); margin-bottom: 0.85rem;">Key Architecture &amp; Engineering Decisions</h4>
+        <ul style="list-style: square; padding-left: 1.25rem; color: var(--light-text); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem;">
+            ${info.highlights.map(h => `<li style="margin-bottom: 0.5rem;"><span style="color: var(--text-color);">${h}</span></li>`).join('')}
         </ul>
         
-        <a href="${info.github}" target="_blank" rel="noreferrer" class="cta-button" style="display: inline-flex; text-decoration: none;"><i class="fab fa-github" style="margin-right: 0.5rem;"></i> View Source Code</a>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border-color);">
+            <a href="${info.github}" target="_blank" rel="noreferrer" class="editorial-cta-btn primary"><i class="fab fa-github"></i> View GitHub Repository</a>
+            <button class="editorial-cta-btn secondary" onclick="document.getElementById('modal-close').click()"><i class="fas fa-times"></i> Close Dossier</button>
+        </div>
     `;
     
     modalOverlay.classList.add('active');
@@ -490,43 +419,74 @@ if (modalOverlay) {
     });
 }
 
-// Skills Filter & Keyword Search
+// Skills Bento Matrix HUD Filter & Dynamic Keyword Search
 document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.skill-filter-btn');
+    const hudPills = document.querySelectorAll('.hud-pill');
     const searchInput = document.getElementById('skills-search');
-    const categories = document.querySelectorAll('.skill-category');
-    const chips = document.querySelectorAll('.skill-chip');
+    const searchCounter = document.getElementById('search-counter');
+    const bentoCards = document.querySelectorAll('.tech-bento-card');
+    const techItems = document.querySelectorAll('.tech-item');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            const filter = btn.getAttribute('data-filter');
-            categories.forEach(cat => {
-                if (filter === 'all' || cat.getAttribute('data-category') === filter) {
-                    cat.style.display = 'block';
+    let currentFilter = 'all';
+
+    function applyFilterAndSearch() {
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        let visibleCount = 0;
+
+        bentoCards.forEach(card => {
+            const cardCat = card.getAttribute('data-category');
+            const matchesCategory = (currentFilter === 'all' || cardCat === currentFilter);
+
+            let cardVisibleItems = 0;
+            const items = card.querySelectorAll('.tech-item');
+
+            items.forEach(item => {
+                const text = (item.textContent + ' ' + (item.getAttribute('data-keywords') || '')).toLowerCase();
+                const matchesQuery = !query || text.includes(query);
+
+                if (matchesCategory && matchesQuery) {
+                    item.style.display = 'flex';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                    cardVisibleItems++;
+                    visibleCount++;
+                } else if (!matchesCategory) {
+                    item.style.display = 'none';
                 } else {
-                    cat.style.display = 'none';
+                    item.style.display = 'none';
                 }
             });
+
+            if (matchesCategory && (cardVisibleItems > 0 || !query)) {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (searchCounter) {
+            searchCounter.textContent = `${visibleCount} match${visibleCount === 1 ? '' : 'es'}`;
+            searchCounter.style.color = visibleCount > 0 ? 'var(--primary-color)' : '#ef4444';
+        }
+    }
+
+    hudPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            hudPills.forEach(p => {
+                p.classList.remove('active');
+                p.setAttribute('aria-selected', 'false');
+            });
+            pill.classList.add('active');
+            pill.setAttribute('aria-selected', 'true');
+            
+            currentFilter = pill.getAttribute('data-filter') || 'all';
+            applyFilterAndSearch();
         });
     });
 
     if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            chips.forEach(chip => {
-                const text = chip.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    chip.style.opacity = '1';
-                    chip.style.transform = 'scale(1)';
-                } else {
-                    chip.style.opacity = '0.3';
-                    chip.style.transform = 'scale(0.95)';
-                }
-            });
-        });
+        searchInput.addEventListener('input', applyFilterAndSearch);
     }
 });
 
