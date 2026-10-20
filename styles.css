@@ -710,7 +710,9 @@ header.scrolled .nav-cv-btn {
     padding: 1rem 1.2rem;
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    justify-content: center;
+    gap: 0.25rem;
+    min-height: 94px;
     transition: var(--transition-fast);
 }
 
@@ -841,6 +843,8 @@ header.scrolled .nav-cv-btn {
     border: 1px solid rgba(22, 163, 74, 0.25);
     padding: 0.2rem 0.65rem;
     border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .spec-table {
@@ -1726,8 +1730,10 @@ header.scrolled .nav-cv-btn {
 .sec-tags {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 0.4rem;
-    margin-bottom: 1.75rem;
+    min-height: 54px;
+    margin-bottom: 1.5rem;
 }
 
 .sec-tags span {
@@ -1904,7 +1910,9 @@ header.scrolled .nav-cv-btn {
 .os-tags {
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     gap: 0.45rem;
+    min-height: 54px;
     margin-bottom: 1.5rem;
 }
 
@@ -2777,6 +2785,29 @@ header.scrolled .nav-cv-btn {
 
     .project-actions-row .editorial-cta-btn {
         width: 100%;
+    }
+
+    .about-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-cv-btn span {
+        display: none;
+    }
+
+    .nav-cv-btn {
+        padding: 0.45rem 0.65rem;
+    }
+
+    .cred-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .cred-honor-pill {
+        align-items: flex-start;
+        text-align: left;
     }
 }
 
