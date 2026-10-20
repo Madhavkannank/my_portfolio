@@ -499,3 +499,76 @@ if (contactForm) {
         contactForm.reset();
     });
 }
+
+// ==========================================================================
+// Top Viewport Scroll Progress Bar
+// ==========================================================================
+const scrollProgressBar = document.getElementById('scroll-progress-bar');
+const updateScrollProgress = () => {
+    if (!scrollProgressBar) return;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+};
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+window.addEventListener('resize', updateScrollProgress);
+updateScrollProgress();
+
+// ==========================================================================
+// Interactive Architecture Flow Nodes
+// ==========================================================================
+document.querySelectorAll('.arch-flow-node').forEach(node => {
+    node.addEventListener('click', () => {
+        const isHighlighted = node.classList.contains('active-highlight');
+        const parentStack = node.closest('.arch-flow-stack');
+        if (parentStack) {
+            parentStack.querySelectorAll('.arch-flow-node').forEach(n => n.classList.remove('active-highlight'));
+        }
+        if (!isHighlighted) {
+            node.classList.add('active-highlight');
+        }
+    });
+});
+
+// ==========================================================================
+// Dynamic Links between Tech Index skills and Flagship Projects
+// ==========================================================================
+const skillProjectMap = {
+    'pytorch': '#project-kci',
+    'efficientnet': '#project-kci',
+    'opencv': '#project-kci',
+    'xgboost': '#project-guido',
+    'shap': '#project-guido',
+    'transformers': '#project-axel',
+    'fastapi': '#project-kci',
+    'react': '#project-kci',
+    'asyncio': '#project-jarvis',
+    'state machines': '#project-jarvis',
+    'vector': '#project-axel',
+    'nlp': '#project-axel'
+};
+
+document.querySelectorAll('.tech-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const matchedKey = Object.keys(skillProjectMap).find(key => text.includes(key));
+    if (matchedKey) {
+        item.style.cursor = 'pointer';
+        item.setAttribute('title', `Click to view project implementing ${matchedKey.toUpperCase()}`);
+        item.addEventListener('click', () => {
+            const targetSelector = skillProjectMap[matchedKey];
+            const targetCard = document.querySelector(targetSelector);
+            if (targetCard) {
+                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetCard.classList.add('in-view');
+                const canvas = targetCard.querySelector('.diagram-canvas');
+                if (canvas) {
+                    canvas.style.boxShadow = '0 0 0 3px var(--primary-color), var(--shadow-lg)';
+                    setTimeout(() => {
+                        canvas.style.boxShadow = '';
+                    }, 2200);
+                }
+            }
+        });
+    }
+});

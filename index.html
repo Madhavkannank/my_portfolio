@@ -29,10 +29,13 @@
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=20261020_v2">
+    <link rel="stylesheet" href="styles.css?v=20261020_v3">
 </head>
 
 <body>
+    <!-- Top Viewport Scroll Progress Bar -->
+    <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+
     <!-- Header -->
     <header>
         <nav>
@@ -47,9 +50,14 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-            </button>
+            <div class="nav-actions">
+                <a href="assets/Madhav_Kannan_K_CV.pdf" target="_blank" class="nav-cv-btn" aria-label="Download Curriculum Vitae">
+                    <i class="fas fa-file-arrow-down"></i> <span>Resume</span>
+                </a>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
             <div class="hamburger">
                 <div class="line"></div>
                 <div class="line"></div>
@@ -315,12 +323,12 @@
                 <div class="credential-featured-card">
                     <div class="cred-header">
                         <div class="cred-issuer-tag">
-                            <span class="issuer-stamp">IISc BANGALORE · NPTEL</span>
-                            <span class="cred-elite-badge"><i class="fas fa-award"></i> Elite Certification</span>
+                            <span class="issuer-stamp"><i class="fas fa-building-columns"></i> IISc BANGALORE · NPTEL</span>
+                            <span class="cred-elite-badge"><i class="fas fa-award"></i> Elite Certification Honors</span>
                         </div>
-                        <div class="cred-score-box">
-                            <span class="score-num">68%</span>
-                            <span class="score-caption">Elite Exam Score</span>
+                        <div class="cred-honor-pill">
+                            <span class="honor-highlight">NATIONAL ELITE TIER</span>
+                            <span class="score-caption">Proctored Examination · 68%</span>
                         </div>
                     </div>
                     
@@ -442,72 +450,70 @@
                         </div>
                     </div>
 
-                    <!-- Custom Architecture Visual: Jarvis Jr Runtime Pipeline -->
+                    <!-- Architecture Visual: Jarvis Jr Runtime Pipeline -->
                     <div class="project-visual-pane">
                         <div class="diagram-canvas">
                             <div class="diagram-header">
-                                <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
-                                <span class="diagram-tag">Layered Agentic Runtime</span>
+                                <div class="diagram-header-left">
+                                    <span class="diagram-dot-live"></span>
+                                    <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                </div>
+                                <span class="diagram-tag">Layered Agentic OS Runtime</span>
                             </div>
-                            <svg class="pipeline-svg" viewBox="0 0 540 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Jarvis Jr Architecture Diagram">
-                                <rect x="15" y="15" width="510" height="300" rx="14" fill="var(--svg-canvas-bg, rgba(255, 255, 255, 0.02))" stroke="var(--border-color)" stroke-width="1.2"/>
-                                
-                                <!-- Step 1: User Intent Ingest -->
-                                <rect x="35" y="45" width="130" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">INPUT INGESTION</text>
-                                <text x="47" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="var(--text-color)">Natural Intent</text>
-                                <text x="47" y="106" font-family="monospace" font-size="9" fill="var(--light-text)">Voice / Text Prompt</text>
-                                <text x="47" y="120" font-family="monospace" font-size="9" fill="var(--secondary-color)">Context Tokenizer</text>
+                            
+                            <div class="arch-flow-stack">
+                                <div class="arch-flow-node" data-node="1">
+                                    <div class="node-meta">
+                                        <span class="node-idx">01</span>
+                                        <span class="node-phase">INTENT INGESTION</span>
+                                        <span class="node-badge">core/router.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-terminal"></i> Natural Intent Dispatcher</h4>
+                                    <p class="node-desc">Tokenizes natural language input and classifies execution paths into immediate Q&amp;A vs multi-step agent graphs.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-bolt"></i> Low Latency</span>
+                                        <span><i class="fas fa-code-branch"></i> Intent Routing</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 1 to 2 -->
-                                <path d="M165 85 H200" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="202,85 195,81 195,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 2: Router & Semantic Dispatcher -->
-                                <rect x="205" y="40" width="155" height="95" rx="8" fill="var(--card-bg)" stroke="var(--primary-color)" stroke-width="1.6"/>
-                                <rect x="205" y="40" width="155" height="22" rx="8" fill="var(--primary-color)"/>
-                                <text x="218" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#ffffff">ROUTER &amp; DISPATCHER</text>
-                                <text x="218" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">core/router.py</text>
-                                <text x="218" y="100" font-family="monospace" font-size="10" fill="var(--light-text)">Semantic classifier</text>
-                                <text x="218" y="118" font-family="monospace" font-size="9" fill="var(--primary-color)">Fast Q&amp;A vs Task Flow</text>
+                                <div class="arch-flow-node featured" data-node="2">
+                                    <div class="node-meta">
+                                        <span class="node-idx">02</span>
+                                        <span class="node-phase">SUPERVISOR DAG</span>
+                                        <span class="node-badge primary">agents/supervisor.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-sitemap"></i> Task Decomposition Graph</h4>
+                                    <p class="node-desc">Decomposes goals into a dynamic dependency DAG; executes async I/O in parallel while strictly serializing local GPU model inference.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-diagram-project"></i> Dynamic DAG</span>
+                                        <span><i class="fas fa-microchip"></i> Serialized Model Queue</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 2 to 3 -->
-                                <path d="M360 85 H395" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="397,85 390,81 390,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 3: Supervisor & Task Graph -->
-                                <rect x="400" y="40" width="115" height="95" rx="8" fill="var(--card-bg)" stroke="var(--secondary-color)" stroke-width="1.4"/>
-                                <text x="412" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">SUPERVISOR</text>
-                                <text x="412" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-color)">Task Graph</text>
-                                <text x="412" y="98" font-family="monospace" font-size="9" fill="var(--primary-color)">Dynamic DAG</text>
-                                <text x="412" y="113" font-family="monospace" font-size="9" fill="var(--light-text)">Multi-Agent Dec.</text>
-                                <text x="412" y="128" font-family="monospace" font-size="8" fill="var(--secondary-color)">agents/supervisor.py</text>
+                                <div class="arch-split-row">
+                                    <div class="arch-flow-node" data-node="3">
+                                        <div class="node-meta">
+                                            <span class="node-idx">03</span>
+                                            <span class="node-phase">TOOL SANDBOX</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-shield-halved"></i> Deterministic Execution</h4>
+                                        <p class="node-desc">Filesystem, Shell, and Browser tools execute with strict argument validation and zero unrestricted authority.</p>
+                                    </div>
 
-                                <!-- Connector down to Step 4 -->
-                                <path d="M455 135 V175 H365" stroke="var(--secondary-color)" stroke-width="1.8"/>
-                                <polygon points="363,175 370,171 370,179" fill="var(--secondary-color)"/>
-
-                                <!-- Step 4: Tool Sandbox & OS Execution -->
-                                <rect x="180" y="160" width="180" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="195" y="182" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">EXECUTION SANDBOX</text>
-                                <text x="195" y="202" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">Deterministic Tooling</text>
-                                <text x="195" y="220" font-family="monospace" font-size="10" fill="var(--light-text)">Filesystem · Shell · Browser</text>
-                                <text x="195" y="235" font-family="monospace" font-size="9" fill="var(--secondary-color)">Zero Unrestricted Authority</text>
-
-                                <!-- Connector to Step 5 -->
-                                <path d="M180 200 H140" stroke="var(--primary-color)" stroke-width="2"/>
-                                <polygon points="138,200 145,196 145,204" fill="var(--primary-color)"/>
-
-                                <!-- Step 5: Verification & Memory -->
-                                <rect x="35" y="165" width="100" height="135" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="187" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">VERIFICATION</text>
-                                <text x="47" y="207" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">State Engine</text>
-                                <text x="47" y="223" font-family="monospace" font-size="10" fill="var(--light-text)">verification/engine</text>
-                                <line x1="47" y1="233" x2="125" y2="233" stroke="var(--border-color)"/>
-                                <text x="47" y="253" font-family="monospace" font-size="9" fill="var(--text-color)">• State Checking</text>
-                                <text x="47" y="268" font-family="monospace" font-size="9" fill="var(--text-color)">• Episodic Memory</text>
-                                <text x="47" y="283" font-family="monospace" font-size="9" fill="var(--primary-color)">• Self-Recovery</text>
-                            </svg>
+                                    <div class="arch-flow-node" data-node="4">
+                                        <div class="node-meta">
+                                            <span class="node-idx">04</span>
+                                            <span class="node-phase">VERIFIER</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-rotate"></i> State Engine &amp; Memory</h4>
+                                        <p class="node-desc">Inspects real environment post-action states, records episodic memory, and triggers automated self-recovery.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -557,76 +563,70 @@
                         </div>
                     </div>
 
-                    <!-- Custom Architecture Visual: KCI Pipeline -->
+                    <!-- Architecture Visual: KCI Vision Pipeline -->
                     <div class="project-visual-pane">
                         <div class="diagram-canvas">
                             <div class="diagram-header">
-                                <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                <div class="diagram-header-left">
+                                    <span class="diagram-dot-live"></span>
+                                    <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                </div>
                                 <span class="diagram-tag">PyTorch Semantic Engine</span>
                             </div>
-                            <svg class="pipeline-svg" viewBox="0 0 540 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KCI System Architecture Diagram">
-                                <!-- Flow Background Track -->
-                                <rect x="15" y="15" width="510" height="300" rx="14" fill="var(--svg-canvas-bg, rgba(35, 61, 76, 0.03))" stroke="var(--border-color)" stroke-width="1.2"/>
-                                
-                                <!-- Node 1: Input -->
-                                <rect x="35" y="45" width="130" height="80" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--primary-color)">INPUT SOURCE</text>
-                                <text x="47" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="var(--text-color)">Bridge Imagery</text>
-                                <text x="47" y="108" font-family="monospace" font-size="10" fill="var(--light-text)">4K / UAV Scans</text>
+                            
+                            <div class="arch-flow-stack">
+                                <div class="arch-flow-node" data-node="kci-1">
+                                    <div class="node-meta">
+                                        <span class="node-idx">01</span>
+                                        <span class="node-phase">ACQUISITION &amp; TILING</span>
+                                        <span class="node-badge">input/tiler.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-camera"></i> High-Res Structural Scans</h4>
+                                    <p class="node-desc">Ingests 4K drone &amp; UAV bridge inspections; partitions raw imagery into overlapping tiles with histogram normalization to preserve sub-millimeter crack detail.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-expand"></i> 4K / Multi-scale</span>
+                                        <span><i class="fas fa-layer-group"></i> Overlapping Slices</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 1 to 2 -->
-                                <path d="M165 85 H200" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="202,85 195,81 195,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Node 2: Vision Model -->
-                                <rect x="205" y="40" width="160" height="90" rx="8" fill="var(--card-bg)" stroke="var(--primary-color)" stroke-width="1.6"/>
-                                <rect x="205" y="40" width="160" height="22" rx="8" fill="var(--primary-color)"/>
-                                <text x="220" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#ffffff">PYTORCH SEGMENTATION</text>
-                                <text x="220" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">FPN + EfficientNet-B4</text>
-                                <text x="220" y="100" font-family="monospace" font-size="10" fill="var(--light-text)">RTX 3050 Optimized</text>
-                                <text x="220" y="116" font-family="monospace" font-size="9" fill="var(--primary-color)">Multi-scale feature maps</text>
+                                <div class="arch-flow-node featured" data-node="kci-2">
+                                    <div class="node-meta">
+                                        <span class="node-idx">02</span>
+                                        <span class="node-phase">SEMANTIC SEGMENTATION</span>
+                                        <span class="node-badge primary">models/fpn_efficientnet.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-brain"></i> FPN + EfficientNet-B4 Backbone</h4>
+                                    <p class="node-desc">Multi-scale Feature Pyramid Network extracts defect boundaries across hierarchical receptive fields; FP16 PyTorch execution tuned for RTX 3050 6GB VRAM.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-bullseye"></i> Sub-millimeter IoU</span>
+                                        <span><i class="fas fa-microchip"></i> FP16 TensorRT / CUDA</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 2 to 3 -->
-                                <path d="M365 85 H400" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="402,85 395,81 395,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Node 3: Defect Masks -->
-                                <rect x="405" y="35" width="110" height="100" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="415" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">DEFECT MASKS</text>
-                                <rect x="415" y="65" width="8" height="8" rx="2" fill="#e11d48"/>
-                                <text x="428" y="73" font-family="monospace" font-size="10" fill="var(--text-color)">Crack</text>
-                                <rect x="415" y="82" width="8" height="8" rx="2" fill="#d97706"/>
-                                <text x="428" y="90" font-family="monospace" font-size="10" fill="var(--text-color)">Rust</text>
-                                <rect x="415" y="99" width="8" height="8" rx="2" fill="#ea580c"/>
-                                <text x="428" y="107" font-family="monospace" font-size="10" fill="var(--text-color)">Spalling</text>
-                                <rect x="415" y="116" width="8" height="8" rx="2" fill="#2563eb"/>
-                                <text x="428" y="124" font-family="monospace" font-size="10" fill="var(--text-color)">Rebars</text>
+                                <div class="arch-split-row">
+                                    <div class="arch-flow-node" data-node="kci-3">
+                                        <div class="node-meta">
+                                            <span class="node-idx">03</span>
+                                            <span class="node-phase">DEFECT CLUSTERS</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-masks-theater"></i> 4-Class Masking</h4>
+                                        <p class="node-desc">Isolates discrete pixel masks for Cracks, Rust Bleed, Spalling, and Exposed Rebars.</p>
+                                    </div>
 
-                                <!-- Downward Connector to Severity Engine -->
-                                <path d="M460 135 V175 H380" stroke="var(--secondary-color)" stroke-width="1.8"/>
-                                <polygon points="378,175 385,171 385,179" fill="var(--secondary-color)"/>
-
-                                <!-- Node 4: Deterministic Severity Engine -->
-                                <rect x="195" y="155" width="180" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="210" y="177" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">SEVERITY CALCULATION</text>
-                                <text x="210" y="197" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">Deterministic Risk Engine</text>
-                                <text x="210" y="215" font-family="monospace" font-size="10" fill="var(--light-text)">Load index · Defect area %</text>
-                                <text x="210" y="230" font-family="monospace" font-size="9" fill="#16a34a">Critical threshold flags</text>
-
-                                <!-- Connector to Output -->
-                                <path d="M195 200 H145" stroke="var(--primary-color)" stroke-width="2"/>
-                                <polygon points="143,200 150,196 150,204" fill="var(--primary-color)"/>
-
-                                <!-- Node 5: Output & API -->
-                                <rect x="35" y="160" width="105" height="135" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="45" y="182" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">SYSTEM OUTPUT</text>
-                                <text x="45" y="202" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">FastAPI</text>
-                                <text x="45" y="218" font-family="monospace" font-size="10" fill="var(--light-text)">REST Endpoints</text>
-                                <line x1="45" y1="228" x2="130" y2="228" stroke="var(--border-color)"/>
-                                <text x="45" y="248" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">PDF Report</text>
-                                <text x="45" y="264" font-family="monospace" font-size="10" fill="var(--light-text)">Automated Audit</text>
-                                <text x="45" y="282" font-family="monospace" font-size="9" fill="var(--primary-color)">React UI</text>
-                            </svg>
+                                    <div class="arch-flow-node" data-node="kci-4">
+                                        <div class="node-meta">
+                                            <span class="node-idx">04</span>
+                                            <span class="node-phase">RISK ENGINE &amp; API</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-calculator"></i> Deterministic Severity</h4>
+                                        <p class="node-desc">Computes surface area defect percentages and outputs automated PDF audit reports via FastAPI.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -675,74 +675,70 @@
                         </div>
                     </div>
 
-                    <!-- Custom Architecture Visual: GUIDO Pipeline -->
+                    <!-- Architecture Visual: GUIDO Bioinformatics Pipeline -->
                     <div class="project-visual-pane">
                         <div class="diagram-canvas">
                             <div class="diagram-header">
-                                <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                <div class="diagram-header-left">
+                                    <span class="diagram-dot-live"></span>
+                                    <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                </div>
                                 <span class="diagram-tag">Gradient Boosted Multi-Omics</span>
                             </div>
-                            <svg class="pipeline-svg" viewBox="0 0 540 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GUIDO Architecture Diagram">
-                                <rect x="15" y="15" width="510" height="300" rx="14" fill="var(--svg-canvas-bg, rgba(35, 61, 76, 0.03))" stroke="var(--border-color)" stroke-width="1.2"/>
-                                
-                                <!-- Step 1: Multi-Omics Data Matrix -->
-                                <rect x="35" y="45" width="130" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">INPUT MATRIX</text>
-                                <text x="47" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="var(--text-color)">Multi-Omics Data</text>
-                                <text x="47" y="106" font-family="monospace" font-size="9" fill="var(--light-text)">Genomics · Proteomics</text>
-                                <text x="47" y="120" font-family="monospace" font-size="9" fill="var(--secondary-color)">Clinical Biomarkers</text>
+                            
+                            <div class="arch-flow-stack">
+                                <div class="arch-flow-node" data-node="guido-1">
+                                    <div class="node-meta">
+                                        <span class="node-idx">01</span>
+                                        <span class="node-phase">OMICS PREPROCESSING</span>
+                                        <span class="node-badge">data/matrix_builder.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-dna"></i> Multi-Omics Matrix Harmonization</h4>
+                                    <p class="node-desc">Integrates high-dimensional patient genomics, proteomics, and clinical biomarker arrays; performs robust variance scaling and imputation across heterogeneous clinical cohorts.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-database"></i> High-Dim Sparse Matrix</span>
+                                        <span><i class="fas fa-filter"></i> Cohort Normalization</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 1 to 2 -->
-                                <path d="M165 85 H200" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="202,85 195,81 195,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 2: XGBoost Classifier -->
-                                <rect x="205" y="40" width="155" height="95" rx="8" fill="var(--card-bg)" stroke="var(--primary-color)" stroke-width="1.6"/>
-                                <rect x="205" y="40" width="155" height="22" rx="8" fill="var(--primary-color)"/>
-                                <text x="218" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#ffffff">CLASSIFIER CORE</text>
-                                <text x="218" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">XGBoost Ensemble</text>
-                                <text x="218" y="100" font-family="monospace" font-size="10" fill="var(--light-text)">Gradient Tree Boosting</text>
-                                <text x="218" y="118" font-family="monospace" font-size="9" fill="var(--primary-color)">Patient risk stratification</text>
+                                <div class="arch-flow-node featured" data-node="guido-2">
+                                    <div class="node-meta">
+                                        <span class="node-idx">02</span>
+                                        <span class="node-phase">ENSEMBLE CLASSIFIER</span>
+                                        <span class="node-badge primary">models/xgboost_core.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-network-wired"></i> Regularized XGBoost Engine</h4>
+                                    <p class="node-desc">Gradient-boosted decision trees optimize patient risk classification curves; incorporates cross-validated regularization to suppress collinear genetic overfitting.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-gauge-high"></i> High ROC-AUC Curve</span>
+                                        <span><i class="fas fa-shield-virus"></i> Overfit Suppression</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 2 to 3 -->
-                                <path d="M360 85 H395" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="397,85 390,81 390,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 3: SHAP Explanations -->
-                                <rect x="400" y="40" width="115" height="95" rx="8" fill="var(--card-bg)" stroke="var(--secondary-color)" stroke-width="1.4"/>
-                                <text x="412" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">SHAP SCORING</text>
-                                <text x="412" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-color)">Feature Impact</text>
-                                <!-- Mini SHAP Bar Graphic -->
-                                <rect x="412" y="90" width="60" height="6" rx="2" fill="var(--primary-color)"/>
-                                <rect x="412" y="100" width="40" height="6" rx="2" fill="var(--primary-color)"/>
-                                <rect x="412" y="110" width="75" height="6" rx="2" fill="var(--secondary-color)"/>
-                                <text x="412" y="127" font-family="monospace" font-size="8" fill="var(--light-text)">Waterfall Attribution</text>
+                                <div class="arch-split-row">
+                                    <div class="arch-flow-node" data-node="guido-3">
+                                        <div class="node-meta">
+                                            <span class="node-idx">03</span>
+                                            <span class="node-phase">EXPLAINABILITY</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-chart-column"></i> SHAP Attribution</h4>
+                                        <p class="node-desc">Computes exact Shapley waterfall values allowing clinicians to trace risk scores to specific genetic drivers.</p>
+                                    </div>
 
-                                <!-- Connector down to Service Layer -->
-                                <path d="M455 135 V175 H365" stroke="var(--secondary-color)" stroke-width="1.8"/>
-                                <polygon points="363,175 370,171 370,179" fill="var(--secondary-color)"/>
-
-                                <!-- Step 4: FastAPI Microservice -->
-                                <rect x="180" y="160" width="180" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="195" y="182" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">SERVICE BACKEND</text>
-                                <text x="195" y="202" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">FastAPI Microservice</text>
-                                <text x="195" y="220" font-family="monospace" font-size="10" fill="var(--light-text)">Docker Containerized</text>
-                                <text x="195" y="235" font-family="monospace" font-size="9" fill="var(--secondary-color)">JSON Payload &amp; Risk Metrics</text>
-
-                                <!-- Connector to Step 5 -->
-                                <path d="M180 200 H140" stroke="var(--primary-color)" stroke-width="2"/>
-                                <polygon points="138,200 145,196 145,204" fill="var(--primary-color)"/>
-
-                                <!-- Step 5: React Dashboard -->
-                                <rect x="35" y="165" width="100" height="135" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="187" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">FRONTEND</text>
-                                <text x="47" y="207" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">React Audit</text>
-                                <text x="47" y="223" font-family="monospace" font-size="10" fill="var(--light-text)">Interactive UI</text>
-                                <line x1="47" y1="233" x2="125" y2="233" stroke="var(--border-color)"/>
-                                <text x="47" y="253" font-family="monospace" font-size="9" fill="var(--text-color)">• Risk Profiles</text>
-                                <text x="47" y="268" font-family="monospace" font-size="9" fill="var(--text-color)">• Biomarker Plots</text>
-                                <text x="47" y="283" font-family="monospace" font-size="9" fill="var(--primary-color)">• Cohort Analysis</text>
-                            </svg>
+                                    <div class="arch-flow-node" data-node="guido-4">
+                                        <div class="node-meta">
+                                            <span class="node-idx">04</span>
+                                            <span class="node-phase">SERVICE LAYER</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-server"></i> FastAPI &amp; React UI</h4>
+                                        <p class="node-desc">Containerized REST microservice streaming real-time patient risk metrics to an interactive clinical dashboard.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -791,72 +787,70 @@
                         </div>
                     </div>
 
-                    <!-- Custom Architecture Visual: AXEL Pipeline -->
+                    <!-- Architecture Visual: AXEL Vector Pipeline -->
                     <div class="project-visual-pane">
                         <div class="diagram-canvas">
                             <div class="diagram-header">
-                                <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
-                                <span class="diagram-tag">Vector Embedding Pipeline</span>
+                                <div class="diagram-header-left">
+                                    <span class="diagram-dot-live"></span>
+                                    <span class="diagram-title">// SYSTEM ARCHITECTURE PIPELINE</span>
+                                </div>
+                                <span class="diagram-tag">Dense Vector Embedding Engine</span>
                             </div>
-                            <svg class="pipeline-svg" viewBox="0 0 540 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AXEL Architecture Diagram">
-                                <rect x="15" y="15" width="510" height="300" rx="14" fill="var(--svg-canvas-bg, rgba(35, 61, 76, 0.03))" stroke="var(--border-color)" stroke-width="1.2"/>
-                                
-                                <!-- Step 1: Multi-format Ingest -->
-                                <rect x="35" y="45" width="130" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="70" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">MULTI-FORMAT INGEST</text>
-                                <text x="47" y="90" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="600" fill="var(--text-color)">Document Streams</text>
-                                <text x="47" y="106" font-family="monospace" font-size="9" fill="var(--light-text)">PDF · DOCX · Images</text>
-                                <text x="47" y="120" font-family="monospace" font-size="9" fill="var(--secondary-color)">Tesseract OCR Layer</text>
+                            
+                            <div class="arch-flow-stack">
+                                <div class="arch-flow-node" data-node="axel-1">
+                                    <div class="node-meta">
+                                        <span class="node-idx">01</span>
+                                        <span class="node-phase">INGESTION &amp; OCR</span>
+                                        <span class="node-badge">pipeline/ingest.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-file-import"></i> Multi-Format Stream &amp; OCR</h4>
+                                    <p class="node-desc">Ingests heterogeneous PDF, DOCX, and scanned documents; extracts structured typography and runs Tesseract OCR for embedded diagram and scanned table recovery.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-file-lines"></i> Multi-Format Parsing</span>
+                                        <span><i class="fas fa-eye"></i> Tesseract OCR Layer</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 1 to 2 -->
-                                <path d="M165 85 H200" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="202,85 195,81 195,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 2: Text Chunker & Cleaner -->
-                                <rect x="205" y="40" width="155" height="95" rx="8" fill="var(--card-bg)" stroke="var(--primary-color)" stroke-width="1.6"/>
-                                <rect x="205" y="40" width="155" height="22" rx="8" fill="var(--primary-color)"/>
-                                <text x="218" y="55" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#ffffff">CHUNKING &amp; CLEANING</text>
-                                <text x="218" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">Semantic Parser</text>
-                                <text x="218" y="100" font-family="monospace" font-size="10" fill="var(--light-text)">Sliding window tokens</text>
-                                <text x="218" y="118" font-family="monospace" font-size="9" fill="var(--primary-color)">Metadata normalization</text>
+                                <div class="arch-flow-node featured" data-node="axel-2">
+                                    <div class="node-meta">
+                                        <span class="node-idx">02</span>
+                                        <span class="node-phase">VECTORIZATION</span>
+                                        <span class="node-badge primary">models/sentence_transformer.py</span>
+                                    </div>
+                                    <h4 class="node-title"><i class="fas fa-vector-square"></i> Sentence-Transformers Core</h4>
+                                    <p class="node-desc">Sliding-window semantic chunker generates 384-dimensional dense embeddings (all-MiniLM-L6-v2) stored in normalized vector space for cosine distance lookup.</p>
+                                    <div class="node-metrics">
+                                        <span><i class="fas fa-cubes"></i> 384-Dim Vectors</span>
+                                        <span><i class="fas fa-bolt"></i> Sub-Second Embeddings</span>
+                                    </div>
+                                </div>
 
-                                <!-- Connector 2 to 3 -->
-                                <path d="M360 85 H395" stroke="var(--primary-color)" stroke-width="2" stroke-dasharray="4 4"/>
-                                <polygon points="397,85 390,81 390,89" fill="var(--primary-color)"/>
+                                <div class="arch-connector-line"><i class="fas fa-arrow-down"></i></div>
 
-                                <!-- Step 3: Sentence Transformers -->
-                                <rect x="400" y="40" width="115" height="95" rx="8" fill="var(--card-bg)" stroke="var(--secondary-color)" stroke-width="1.4"/>
-                                <text x="412" y="62" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">TRANSFORMERS</text>
-                                <text x="412" y="80" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="700" fill="var(--text-color)">Dense Vectors</text>
-                                <text x="412" y="98" font-family="monospace" font-size="9" fill="var(--primary-color)">384-dim Space</text>
-                                <text x="412" y="113" font-family="monospace" font-size="9" fill="var(--light-text)">Cosine Distance</text>
-                                <text x="412" y="128" font-family="monospace" font-size="8" fill="var(--secondary-color)">all-MiniLM-L6-v2</text>
+                                <div class="arch-split-row">
+                                    <div class="arch-flow-node" data-node="axel-3">
+                                        <div class="node-meta">
+                                            <span class="node-idx">03</span>
+                                            <span class="node-phase">RETRIEVAL</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-magnifying-glass"></i> Top-K Similarity Search</h4>
+                                        <p class="node-desc">Indexes high-density clusters; returns ranked context matches with exact document page &amp; line citation provenance.</p>
+                                    </div>
 
-                                <!-- Connector down to Index -->
-                                <path d="M455 135 V175 H365" stroke="var(--secondary-color)" stroke-width="1.8"/>
-                                <polygon points="363,175 370,171 370,179" fill="var(--secondary-color)"/>
-
-                                <!-- Step 4: Vector Store & Index -->
-                                <rect x="180" y="160" width="180" height="85" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="195" y="182" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--primary-color)">VECTOR INDEX</text>
-                                <text x="195" y="202" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">Indexed Vector Space</text>
-                                <text x="195" y="220" font-family="monospace" font-size="10" fill="var(--light-text)">Fast similarity clustering</text>
-                                <text x="195" y="235" font-family="monospace" font-size="9" fill="var(--secondary-color)">Sub-second query lookup</text>
-
-                                <!-- Connector to Step 5 -->
-                                <path d="M180 200 H140" stroke="var(--primary-color)" stroke-width="2"/>
-                                <polygon points="138,200 145,196 145,204" fill="var(--primary-color)"/>
-
-                                <!-- Step 5: Query Engine -->
-                                <rect x="35" y="165" width="100" height="135" rx="8" fill="var(--card-bg)" stroke="var(--border-color)" stroke-width="1.2"/>
-                                <text x="47" y="187" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="var(--secondary-color)">RETRIEVAL</text>
-                                <text x="47" y="207" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="var(--text-color)">Context API</text>
-                                <text x="47" y="223" font-family="monospace" font-size="10" fill="var(--light-text)">&lt; 80ms latency</text>
-                                <line x1="47" y1="233" x2="125" y2="233" stroke="var(--border-color)"/>
-                                <text x="47" y="253" font-family="monospace" font-size="9" fill="var(--text-color)">• Top-k ranked</text>
-                                <text x="47" y="268" font-family="monospace" font-size="9" fill="var(--text-color)">• Source citation</text>
-                                <text x="47" y="283" font-family="monospace" font-size="9" fill="var(--primary-color)">• Desktop Bridge</text>
-                            </svg>
+                                    <div class="arch-flow-node" data-node="axel-4">
+                                        <div class="node-meta">
+                                            <span class="node-idx">04</span>
+                                            <span class="node-phase">API GATEWAY</span>
+                                        </div>
+                                        <h4 class="node-title"><i class="fas fa-desktop"></i> Desktop Assistant Bridge</h4>
+                                        <p class="node-desc">&lt; 80ms latency REST API streaming contextual knowledge blocks to local offline desktop AI agents.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </article>
