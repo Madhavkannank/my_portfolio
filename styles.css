@@ -1224,6 +1224,13 @@ header.scrolled .hamburger .line {
     color: var(--ink-soft);
 }
 
+.more-project-links {
+    display: inline-flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 /* ==========================================================================
    SECTION E: EXPERIENCE (#experience)
    ========================================================================== */
