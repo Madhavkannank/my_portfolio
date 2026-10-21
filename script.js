@@ -1,260 +1,110 @@
-// Mobile menu toggle
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-const navLinksItems = document.querySelectorAll('.nav-links li');
+// ==========================================================================
+// Madhav Kannan K — Portfolio JavaScript
+// Pure Vanilla JS · Zero Dependencies · High Performance
+// ==========================================================================
 
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-});
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Mobile Menu Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links a');
 
-// Close mobile menu when clicking on a nav link
-navLinksItems.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            const isActive = hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
+            hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
 
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            const headerOffset = 80;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+                hamburger.setAttribute('aria-expanded', 'false');
             });
-        }
+        });
+    }
+
+    // 2. Smooth Scrolling for Anchor Links with Header Offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#' || targetId === '') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                e.preventDefault();
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
 
-// Deep link / URL param scroll handler
-const checkInitialScroll = () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const targetId = urlParams.get('scroll') || (window.location.hash ? window.location.hash.substring(1) : null);
-    if (targetId) {
-        const el = document.getElementById(targetId);
-        if (el) {
-            el.scrollIntoView();
-        }
-    }
-};
-checkInitialScroll();
-window.addEventListener('DOMContentLoaded', checkInitialScroll);
+    // 3. Theme Toggle Functionality (Light Paper by Default, respects prefers-color-scheme on first visit)
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon') || (themeToggle ? themeToggle.querySelector('i') : null);
 
-// Update copyright year
-document.getElementById('year').textContent = new Date().getFullYear();
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
 
-// Theme Toggle Functionality
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle.querySelector('i');
+    document.documentElement.setAttribute('data-theme', initialTheme);
 
-// Check for saved theme preference or default to dark mode
-const currentTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', currentTheme);
+    const moonSvg = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+    const sunSvg = `<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
 
-// Update icon based on current theme
-function updateThemeIcon(theme) {
-    if (theme === 'dark') {
-        themeIcon.className = 'fas fa-sun';
-    } else {
-        themeIcon.className = 'fas fa-moon';
-    }
-}
-
-// Initialize icon
-updateThemeIcon(currentTheme);
-
-// Theme toggle event listener
-themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    // Update theme
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-    
-    // Add a subtle animation to the toggle button
-    themeToggle.style.transform = 'rotate(360deg)';
-    setTimeout(() => {
-        themeToggle.style.transform = '';
-    }, 300);
-});
-
-// Lightweight scroll reveals for headings and cards
-const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.flagship-card, .secondary-card, .os-card, .ledger-row, .credential-featured-card, .domains-overview-card, .skill-category, .section-editorial-header');
-    const windowHeight = window.innerHeight;
-
-    elements.forEach((element) => {
-        const rect = element.getBoundingClientRect();
-        const inView = rect.top < windowHeight - 40 && rect.bottom > 40;
-        if (inView) {
-            element.classList.add('in-view');
-        }
-    });
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(animateOnScroll, 100);
-});
-
-window.addEventListener('scroll', animateOnScroll, { passive: true });
-
-// Notification function
-function showNotification(message, type = 'success') {
-    // Remove any existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-    notification.textContent = message;
-    
-    // Add styles
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.right = '20px';
-    notification.style.padding = '15px 25px';
-    notification.style.borderRadius = '5px';
-    notification.style.color = 'white';
-    notification.style.zIndex = '1000';
-    notification.style.opacity = '0';
-    notification.style.transition = 'opacity 0.3s ease';
-    
-    // Set background color based on type
-    notification.style.backgroundColor = type === 'success' ? '#4CAF50' : '#f44336';
-    
-    // Add to DOM
-    document.body.appendChild(notification);
-    
-    // Trigger animation
-    setTimeout(() => {
-        notification.style.opacity = '1';
-    }, 10);
-    
-    // Remove after delay
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
-    }, 3000);
-}
-
-// Copy to clipboard for contact items (global handler)
-document.addEventListener('click', async (e) => {
-    const btn = e.target.closest('.copy-btn');
-    if (!btn) return;
-
-    const value = btn.getAttribute('data-copy');
-    if (!value) return;
-
-    try {
-        if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(value);
+    function updateThemeIcon(theme) {
+        if (!themeToggle) return;
+        if (theme === 'dark') {
+            themeToggle.innerHTML = sunSvg;
+            themeToggle.setAttribute('aria-label', 'Switch to light paper theme');
         } else {
-            const ta = document.createElement('textarea');
-            ta.value = value;
-            ta.style.position = 'fixed';
-            ta.style.left = '-9999px';
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            document.execCommand('copy');
-            ta.remove();
+            themeToggle.innerHTML = moonSvg;
+            themeToggle.setAttribute('aria-label', 'Switch to dark theme');
         }
-        showNotification('Copied to clipboard', 'success');
-
-        // Temporary visual feedback
-        const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i>';
-        btn.disabled = true;
-        setTimeout(() => {
-            btn.innerHTML = original;
-            btn.disabled = false;
-        }, 1200);
-    } catch (err) {
-        console.error('Copy failed', err);
-        showNotification('Copy failed', 'error');
-    }
-});
-
-// Skills scroll listener removed (using clean categorized chips)
-
-// Add active class to navigation links based on scroll position
-const sections = document.querySelectorAll('section');
-const headerEl = document.querySelector('header');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    if (headerEl) {
-        headerEl.classList.toggle('scrolled', window.scrollY > 40);
     }
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.offsetHeight;
-        
-        if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-            current = '#' + section.getAttribute('id');
-        }
-    });
-    
-    navLinksItems.forEach(item => {
-        const link = item.querySelector('a');
-        if (link) {
-            link.classList.toggle('active', link.getAttribute('href') === current);
-        }
-    });
-});
+    updateThemeIcon(initialTheme);
 
-// Projects section uses fluid editorial showcase (no rigid horizontal track)
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
-// Back to top button
-const backToTop = document.getElementById('back-to-top');
-window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('visible', window.scrollY > 400);
-}, { passive: true });
-backToTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
 
-// Interactive 3D Depth Parallax for Hero Landing Page
-document.addEventListener('DOMContentLoaded', () => {
-    const heroSection = document.querySelector('.hero');
+            themeToggle.style.transform = 'rotate(180deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 250);
+        });
+    }
+
+    // 4. Hero Parallax Layering (Disabled under prefers-reduced-motion)
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const heroSection = document.getElementById('home');
     const bgLayer = document.getElementById('hero-bg-layer');
     const personLayer = document.getElementById('hero-person-layer');
 
-    if (heroSection && bgLayer && personLayer) {
+    if (!prefersReducedMotion && heroSection && bgLayer && personLayer) {
         heroSection.addEventListener('mousemove', (e) => {
             const { clientX, clientY } = e;
             const { innerWidth, innerHeight } = window;
             const xOffset = (clientX / innerWidth - 0.5) * 2;
             const yOffset = (clientY / innerHeight - 0.5) * 2;
 
-            // Background moves subtly without zoom
-            bgLayer.style.transform = `translate3d(${xOffset * 10}px, ${yOffset * 10}px, 0)`;
-            
-            // Foreground person layer moves in opposite direction for 3D pop effect without zoom
-            personLayer.style.transform = `translate3d(${xOffset * -20}px, ${yOffset * -20}px, 0)`;
+            bgLayer.style.transform = `translate3d(${xOffset * 6}px, ${yOffset * 6}px, 0)`;
+            personLayer.style.transform = `translate3d(${xOffset * -10}px, ${yOffset * -10}px, 0)`;
         });
 
         heroSection.addEventListener('mouseleave', () => {
@@ -262,313 +112,85 @@ document.addEventListener('DOMContentLoaded', () => {
             personLayer.style.transform = 'translate3d(0, 0, 0)';
         });
     }
-});
 
-// Interactive Project Details Modal
-const projectDetails = {
-    'Jarvis Jr': {
-        title: 'Jarvis Jr — Personal AI Assistant & OS Automation Runtime',
-        subtitle: 'Layered Local-First AI Runtime with Supervisor-Worker Architecture',
-        stack: ['Python', 'AsyncIO', 'Multi-Agent', 'POSIX/Win32', 'Vector Memory', 'Sandboxing'],
-        highlights: [
-            'Layered modular architecture decoupling core orchestration (app/jarvis.py), semantic routing (core/router.py), and planning (agents/supervisor.py).',
-            'Dynamic task decomposition graph executing independent I/O workflows concurrently while maintaining strict serialized model inference.',
-            'Deterministic tool execution sandbox with strict privilege separation, argument validation, and structured error propagation.',
-            'Hardware-aware local execution engineered for 6GB VRAM bounds (RTX 3050) with cross-platform Linux & Windows runtimes.'
-        ],
-        github: 'https://github.com/Madhavkannank/juniorjarvis'
-    },
-    'KCI': {
-        title: 'KCI (Kandhari Construction Intelligence)',
-        subtitle: 'Infrastructure Defect Detection & Severity Assessment System',
-        stack: ['Python', 'PyTorch', 'FastAPI', 'React', 'EfficientNet-B4', 'FPN', 'OpenCV'],
-        highlights: [
-            'End-to-end computer vision pipeline segmenting structural defects (Crack, Rust, Spalling, Exposed Rebars).',
-            'FPN + EfficientNet-B4 primary semantic segmentation baseline built for RTX 3050 GPU optimization.',
-            'Deterministic, explainable risk scoring engine prioritizing urgent infrastructure repairs.',
-            'FastAPI REST microservice serving structured JSON outputs and generating PDF inspection reports.'
-        ],
-        github: 'https://github.com/Madhavkannank/KCI'
-    },
-    'GUIDO': {
-        title: 'GUIDO — Multi-Omics Disease Risk Profiling',
-        subtitle: 'Predictive Classifier & Interactive Audit Dashboard',
-        stack: ['Python', 'XGBoost', 'SHAP', 'FastAPI', 'React', 'Docker'],
-        highlights: [
-            'XGBoost predictive classifiers analyzing genomic and clinical multi-omics datasets.',
-            'SHAP explanation scoring delivering patient-level feature attribution and transparent risk metrics.',
-            'FastAPI backend service layer powering a responsive React data visualization dashboard.'
-        ],
-        github: 'https://github.com/Madhavkannank/guido'
-    },
-    'AXEL': {
-        title: 'AXEL — Intelligent Document Processing',
-        subtitle: 'Metadata Extraction & Sub-Second Vector Search',
-        stack: ['Python', 'NLP', 'Sentence-Transformers', 'Vector Embeddings', 'OCR'],
-        highlights: [
-            'Multi-format parser extracting structured metadata from PDFs, scanned images, and DOCX documents.',
-            'Semantic vector search using sentence-transformers for sub-second query retrieval.',
-            'Desktop integration enabling local document indexing and instant semantic lookup.'
-        ],
-        github: 'https://github.com/Madhavkannank/Axel'
-    },
-    'Audit-QP': {
-        title: 'Audit-QP — Syllabus & Question Paper Analyzer',
-        subtitle: 'Academic Exam Coverage & Gap Analysis Engine',
-        stack: ['Python', 'spaCy', 'FastAPI', 'PDF Parsing', 'NLP'],
-        highlights: [
-            'Automated syllabus-to-exam coverage analysis engine built for academic institution quality audits.',
-            'Custom spaCy NLP pipeline parsing question difficulty, Bloom taxonomy levels, and topic distribution.',
-            'FastAPI endpoints returning instant compliance reports and curriculum gap notifications.'
-        ],
-        github: 'https://github.com/Madhavkannank/audit.qp'
-    },
-    'Aura-ECE': {
-        title: 'Aura-ECE — Early Childhood Educational Intelligence',
-        subtitle: 'Multimodal Teacher Observation & Parent Reporting',
-        stack: ['Python', 'FastAPI', 'MongoDB', 'Streamlit', 'NLP'],
-        highlights: [
-            'Privacy-first educational assessment system processing teacher observation narratives.',
-            'MongoDB database backend storing longitudinal student growth metrics and observation logs.',
-            'Streamlit dashboard generating automated, readable progress reports for parents.'
-        ],
-        github: 'https://github.com/Madhavkannank/AURA_ECE'
-    },
-    'Color App': {
-        title: 'Color App — Theme & Palette Suggester',
-        subtitle: 'Java Desktop Application with MySQL Storage',
-        stack: ['Java', 'Swing', 'FlatLaf', 'MySQL', 'JDBC'],
-        highlights: [
-            'Desktop application generating visual color schemes and complementary hex palettes.',
-            'FlatLaf modern look-and-feel framework integration for crisp UI styling.',
-            'MySQL relational storage persisting user-saved themes and custom color collections.'
-        ],
-        github: 'https://github.com/Madhavkannank/Colorsuggestion_app_inJAVA'
-    }
-};
+    // 5. Reading Scroll Progress Bar & Scroll-Spy Active Section Tracking
+    const progressBar = document.getElementById('progressBar');
+    const sections = document.querySelectorAll('section');
 
-// Modal Trigger Event Handlers
-document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('.open-modal-btn');
-    if (trigger) {
-        const key = trigger.getAttribute('data-project');
-        const info = projectDetails[key];
-        if (info) {
-            openProjectModal(info);
-        }
-        return;
-    }
-    const card = e.target.closest('.flagship-card, .secondary-card');
-    if (card && !e.target.closest('a') && !e.target.closest('button')) {
-        const titleEl = card.querySelector('.project-title, .sec-title');
-        if (!titleEl) return;
-        const text = titleEl.textContent.trim();
-        const key = Object.keys(projectDetails).find(k => text.includes(k));
-        if (key && projectDetails[key]) {
-            openProjectModal(projectDetails[key]);
-        }
-    }
-});
-
-const modalOverlay = document.getElementById('project-modal');
-const modalClose = document.getElementById('modal-close');
-const modalContent = document.getElementById('modal-content');
-
-function openProjectModal(info) {
-    if (!modalOverlay || !modalContent) return;
-    
-    modalContent.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--primary-color); font-weight: 700; letter-spacing: 0.1em;">// ARCHITECTURAL DOSSIER</span>
-        </div>
-        <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; color: var(--text-color); margin-bottom: 0.35rem; letter-spacing: -0.02em;">${info.title}</h2>
-        <p style="color: var(--secondary-color); font-weight: 600; font-size: 0.98rem; margin-bottom: 1.5rem;">${info.subtitle}</p>
+    window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
         
-        <div style="display: flex; gap: 0.45rem; flex-wrap: wrap; margin-bottom: 1.75rem;">
-            ${info.stack.map(s => `<span style="background: var(--light-bg); border: 1px solid var(--border-color); color: var(--text-color); font-family: var(--font-mono); font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.78rem;">${s}</span>`).join('')}
-        </div>
-        
-        <h4 style="font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary-color); margin-bottom: 0.85rem;">Key Architecture &amp; Engineering Decisions</h4>
-        <ul style="list-style: square; padding-left: 1.25rem; color: var(--light-text); font-size: 0.95rem; line-height: 1.75; margin-bottom: 2rem;">
-            ${info.highlights.map(h => `<li style="margin-bottom: 0.5rem;"><span style="color: var(--text-color);">${h}</span></li>`).join('')}
-        </ul>
-        
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap; padding-top: 1.25rem; border-top: 1px solid var(--border-color);">
-            <a href="${info.github}" target="_blank" rel="noreferrer" class="editorial-cta-btn primary"><i class="fab fa-github"></i> View GitHub Repository</a>
-            <button class="editorial-cta-btn secondary" onclick="document.getElementById('modal-close').click()"><i class="fas fa-times"></i> Close Dossier</button>
-        </div>
-    `;
-    
-    modalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-if (modalClose) {
-    modalClose.addEventListener('click', () => {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+        if (progressBar) {
+            progressBar.style.width = scrolled + '%';
         }
-    });
-}
 
-// Skills Bento Matrix HUD Filter & Dynamic Keyword Search
-document.addEventListener('DOMContentLoaded', () => {
-    const hudPills = document.querySelectorAll('.hud-pill');
-    const searchInput = document.getElementById('skills-search');
-    const searchCounter = document.getElementById('search-counter');
-    const bentoCards = document.querySelectorAll('.tech-bento-card');
-    const techItems = document.querySelectorAll('.tech-item');
+        // Active link tracking (Scroll-spy)
+        let currentSectionId = '';
+        if (winScroll + window.innerHeight >= document.documentElement.scrollHeight - 60) {
+            currentSectionId = '#contact';
+        } else {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                const sectionHeight = section.offsetHeight;
+                if (winScroll >= sectionTop && winScroll < sectionTop + sectionHeight) {
+                    currentSectionId = '#' + section.getAttribute('id');
+                }
+            });
+        }
 
-    let currentFilter = 'all';
+        navLinksItems.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === currentSectionId);
+        });
+    }, { passive: true });
 
-    function applyFilterAndSearch() {
-        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-        let visibleCount = 0;
+    // 6. Copy Email to Clipboard with Toast Notification
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMessage');
 
-        bentoCards.forEach(card => {
-            const cardCat = card.getAttribute('data-category');
-            const matchesCategory = (currentFilter === 'all' || cardCat === currentFilter);
+    function showToast(message) {
+        if (!toast) return;
+        if (toastMsg) toastMsg.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2800);
+    }
 
-            let cardVisibleItems = 0;
-            const items = card.querySelectorAll('.tech-item');
-
-            items.forEach(item => {
-                const text = (item.textContent + ' ' + (item.getAttribute('data-keywords') || '')).toLowerCase();
-                const matchesQuery = !query || text.includes(query);
-
-                if (matchesCategory && matchesQuery) {
-                    item.style.display = 'flex';
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                    cardVisibleItems++;
-                    visibleCount++;
-                } else if (!matchesCategory) {
-                    item.style.display = 'none';
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener('click', async () => {
+            const email = copyEmailBtn.getAttribute('data-email') || 'madhavkannank2903@gmail.com';
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(email);
                 } else {
-                    item.style.display = 'none';
+                    const ta = document.createElement('textarea');
+                    ta.value = email;
+                    ta.style.position = 'fixed';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    document.execCommand('copy');
+                    ta.remove();
                 }
-            });
-
-            if (matchesCategory && (cardVisibleItems > 0 || !query)) {
-                card.style.display = 'block';
-                card.style.opacity = '1';
-            } else {
-                card.style.display = 'none';
+                copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+                showToast('Email copied to clipboard!');
+                setTimeout(() => {
+                    copyEmailBtn.innerHTML = '<i class="fas fa-copy"></i> <span>Copy</span>';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy', err);
+                showToast('Could not copy email');
             }
         });
-
-        if (searchCounter) {
-            searchCounter.textContent = `${visibleCount} match${visibleCount === 1 ? '' : 'es'}`;
-            searchCounter.style.color = visibleCount > 0 ? 'var(--primary-color)' : '#ef4444';
-        }
     }
 
-    hudPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            hudPills.forEach(p => {
-                p.classList.remove('active');
-                p.setAttribute('aria-selected', 'false');
-            });
-            pill.classList.add('active');
-            pill.setAttribute('aria-selected', 'true');
-            
-            currentFilter = pill.getAttribute('data-filter') || 'all';
-            applyFilterAndSearch();
-        });
-    });
-
-    if (searchInput) {
-        searchInput.addEventListener('input', applyFilterAndSearch);
-    }
-});
-
-// Contact Form Handler
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        showNotification('Thank you! Your message has been sent successfully.', 'success');
-        contactForm.reset();
-    });
-}
-
-// ==========================================================================
-// Top Viewport Scroll Progress Bar
-// ==========================================================================
-const scrollProgressBar = document.getElementById('scroll-progress-bar');
-const updateScrollProgress = () => {
-    if (!scrollProgressBar) return;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    scrollProgressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
-};
-window.addEventListener('scroll', updateScrollProgress, { passive: true });
-window.addEventListener('resize', updateScrollProgress);
-updateScrollProgress();
-
-// ==========================================================================
-// Interactive Architecture Flow Nodes
-// ==========================================================================
-document.querySelectorAll('.arch-flow-node').forEach(node => {
-    node.addEventListener('click', () => {
-        const isHighlighted = node.classList.contains('active-highlight');
-        const parentStack = node.closest('.arch-flow-stack');
-        if (parentStack) {
-            parentStack.querySelectorAll('.arch-flow-node').forEach(n => n.classList.remove('active-highlight'));
-        }
-        if (!isHighlighted) {
-            node.classList.add('active-highlight');
-        }
-    });
-});
-
-// ==========================================================================
-// Dynamic Links between Tech Index skills and Flagship Projects
-// ==========================================================================
-const skillProjectMap = {
-    'pytorch': '#project-kci',
-    'efficientnet': '#project-kci',
-    'opencv': '#project-kci',
-    'xgboost': '#project-guido',
-    'shap': '#project-guido',
-    'transformers': '#project-axel',
-    'fastapi': '#project-kci',
-    'react': '#project-kci',
-    'asyncio': '#project-jarvis',
-    'state machines': '#project-jarvis',
-    'vector': '#project-axel',
-    'nlp': '#project-axel'
-};
-
-document.querySelectorAll('.tech-item').forEach(item => {
-    const text = item.textContent.toLowerCase();
-    const matchedKey = Object.keys(skillProjectMap).find(key => text.includes(key));
-    if (matchedKey) {
-        item.style.cursor = 'pointer';
-        item.setAttribute('title', `Click to view project implementing ${matchedKey.toUpperCase()}`);
-        item.addEventListener('click', () => {
-            const targetSelector = skillProjectMap[matchedKey];
-            const targetCard = document.querySelector(targetSelector);
-            if (targetCard) {
-                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                targetCard.classList.add('in-view');
-                const canvas = targetCard.querySelector('.diagram-canvas');
-                if (canvas) {
-                    canvas.style.boxShadow = '0 0 0 3px var(--primary-color), var(--shadow-lg)';
-                    setTimeout(() => {
-                        canvas.style.boxShadow = '';
-                    }, 2200);
-                }
-            }
-        });
+    // 7. Update Copyright Year dynamically
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
     }
 });
