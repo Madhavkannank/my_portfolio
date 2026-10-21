@@ -524,7 +524,7 @@ header.scrolled .hamburger .line {
 
 .scroll-hint {
     position: absolute;
-    bottom: 40px;
+    bottom: 64px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -536,8 +536,9 @@ header.scrolled .hamburger .line {
     font-size: 12px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    z-index: 10;
-    opacity: 0.8;
+    z-index: 20;
+    opacity: 0.85;
+    pointer-events: none;
 }
 
 .scroll-hint-arrow {
@@ -1590,8 +1591,21 @@ header.scrolled .hamburger .line {
     }
 
     .hero {
-        padding: 110px 20px 80px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 100px 20px 70px 20px;
         min-height: auto;
+    }
+
+    .scroll-hint {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 28px auto 16px auto;
+        z-index: 20;
     }
 
     .hero-person-layer {
