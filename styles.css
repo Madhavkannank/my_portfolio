@@ -1600,11 +1600,16 @@ header.scrolled .hamburger .line {
 
     .hero-mobile-portrait {
         display: block;
+        margin-bottom: 20px;
+        margin-left: 14px;
     }
 
     .hero-mobile-portrait .sticker {
-        width: 110px;
-        height: 110px;
+        width: 124px;
+        height: 124px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 16px;
     }
 
     .hero-content {
