@@ -24,7 +24,7 @@ This report documents the final technical audit, claims verification, visual pro
 | **Audit-QP** | Syllabus coverage & Bloom's taxonomy engine | `Madhavkannank/audit.qp` &rarr; `README.md`, `app/` | **VERIFIED**: Python · FastAPI · spaCy · sentence-transformers · PyMuPDF. |
 | **AURA-ECE** | Early childhood education intelligence | `Madhavkannank/AURA_ECE` &rarr; `requirements.txt` | **VERIFIED**: Python · FastAPI · Streamlit · MongoDB · Groq. |
 | **Color Suggestion App** | Java Swing theme visualizer | `Madhavkannank/Colorsuggestion_app_inJAVA` &rarr; `README.md` | **VERIFIED**: Java · Swing · MySQL · JDBC. |
-| **CampusKaboom** | Peer mentorship web app | `Madhavkannank/Campus-Kaboom` &rarr; `package.json` | **VERIFIED**: React · Vite · Tailwind CSS · Firebase. |
+| **BeatDrop** | Distributed Big Data Analytics Platform | `Madhavkannank/BeatDrop` &rarr; `README.md`, pipeline/ | **VERIFIED**: 239,000 music tracks across a 5-layer HDFS lakehouse, Java MapReduce, Apache Pig, Apache Hive, and PySpark analytics. |
 | **Experience: FOSS CIT** | Joint Secretary (2026–Present), 3-day Linux Workshop | `assets/Madhav_Kannan_K_CV.pdf` & Author confirmation | **VERIFIED**: Sourced core leadership bullet from CV. Added author-verified workshop initiative: organized a 3-day Linux workshop and framed the technical workshop syllabus for participating students. Purged fabricated `fosscit/git_training` repo reference. |
 | **Experience: Nakshathra 2026** | Event lead across 4 simultaneous tracks | `assets/Madhav_Kannan_K_CV.pdf` | **SOURCED**: 4 coding competition tracks organized for second-semester engineering students. |
 | **Experience: IGI Hackathon** | 100+ participants, Gemini grading | `assets/Madhav_Kannan_K_CV.pdf` | **SOURCED**: 2-day story-driven web app competition with 100+ participants and automated evaluation. |
@@ -55,6 +55,9 @@ This report documents the final technical audit, claims verification, visual pro
 7. **Fabricated FOSS CIT Training Repo & Workshop Claims**:
    - Fabricated workshop details referencing `fosscit/git_training` and junior student mentorship cohorts were purged.
    - Replaced with the author-verified initiative (organized a 3-day Linux workshop and framed the technical workshop syllabus) alongside the verified CV bullet (*"Drive student engagement in regional FOSS initiatives, mentoring peers on version control standards, code reviews, and open-source licensing."*).
+8. **CampusKaboom Replaced by BeatDrop**:
+   - CampusKaboom removed from More Projects per author instruction.
+   - Added BeatDrop (`Madhavkannank/BeatDrop`), an end-to-end distributed Big Data analytics platform processing 239,000 tracks across a 5-tier HDFS lakehouse with Java MapReduce, Apache Pig, Apache Hive, and PySpark.
 
 ---
 
