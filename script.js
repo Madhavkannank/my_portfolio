@@ -159,6 +159,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2800);
     }
 
+    function playCopyAnimation() {
+        copyEmailBtn.classList.remove('animate__animated', 'animate__hinge');
+        void copyEmailBtn.offsetWidth;
+        copyEmailBtn.classList.add('animate__animated', 'animate__hinge');
+        copyEmailBtn.addEventListener('animationend', () => {
+            copyEmailBtn.classList.remove('animate__animated', 'animate__hinge');
+        }, { once: true });
+    }
+
     if (copyEmailBtn) {
         copyEmailBtn.addEventListener('click', async () => {
             const email = copyEmailBtn.getAttribute('data-email') || 'madhavkannank2903@gmail.com';
@@ -177,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ta.remove();
                 }
                 copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+                playCopyAnimation();
                 showToast('Email copied to clipboard!');
                 setTimeout(() => {
                     copyEmailBtn.innerHTML = '<i class="fas fa-copy"></i> <span>Copy</span>';
