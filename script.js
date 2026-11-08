@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Copy Email to Clipboard with Toast Notification
     const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const contactEmail = document.querySelector('.contact-giant-email');
     const toast = document.getElementById('toastNotification');
     const toastMsg = document.getElementById('toastMessage');
 
@@ -159,12 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2800);
     }
 
-    function playCopyAnimation() {
-        copyEmailBtn.classList.remove('animate__animated', 'animate__hinge');
-        void copyEmailBtn.offsetWidth;
-        copyEmailBtn.classList.add('animate__animated', 'animate__hinge');
-        copyEmailBtn.addEventListener('animationend', () => {
-            copyEmailBtn.classList.remove('animate__animated', 'animate__hinge');
+    function playCopyAnimation(element) {
+        element.classList.remove('animate__animated', 'animate__hinge');
+        void element.offsetWidth;
+        element.classList.add('animate__animated', 'animate__hinge');
+        element.addEventListener('animationend', () => {
+            element.classList.remove('animate__animated', 'animate__hinge');
         }, { once: true });
     }
 
@@ -186,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ta.remove();
                 }
                 copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
-                playCopyAnimation();
+                playCopyAnimation(copyEmailBtn);
+                if (contactEmail) playCopyAnimation(contactEmail);
                 showToast('Email copied to clipboard!');
                 setTimeout(() => {
                     copyEmailBtn.innerHTML = '<i class="fas fa-copy"></i> <span>Copy</span>';
