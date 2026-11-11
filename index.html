@@ -10,25 +10,26 @@
     <meta name="author" content="Madhav Kannan K">
 
     <!-- Open Graph Metadata -->
+    <link rel="canonical" href="https://madhavkannank.me/">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://madhavkannank.github.io/my_portfolio/">
+    <meta property="og:url" content="https://madhavkannank.me/">
     <meta property="og:title" content="Madhav Kannan K | MSc Data Science student building ML systems">
     <meta property="og:description"
         content="Building computer vision for infrastructure inspection, ML diagnostic prototypes, document search, and open-source tooling.">
-    <meta property="og:image" content="https://madhavkannank.github.io/my_portfolio/images/landing_bg_combined.jpg">
+    <meta property="og:image" content="https://madhavkannank.me/images/og-image.jpg">
 
     <!-- Twitter Metadata -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Madhav Kannan K | MSc Data Science student building ML systems">
     <meta name="twitter:description"
         content="Building computer vision for infrastructure inspection, ML diagnostic prototypes, document search, and open-source tooling.">
-    <meta name="twitter:image" content="https://madhavkannank.github.io/my_portfolio/images/landing_bg_combined.jpg">
+    <meta name="twitter:image" content="https://madhavkannank.me/images/og-image.jpg">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C0281D'/><text x='16' y='22' font-family='system-ui,sans-serif' font-size='16' font-weight='800' fill='%23F6EFDF' text-anchor='middle'>M</text></svg>">
 
     <!-- Preload Critical Hero Asset -->
-    <link rel="preload" as="image" href="images/chatgpt_landing_image.webp" type="image/webp">
+    <link rel="preload" as="image" href="images/background_art.webp" type="image/webp">
     <link rel="preload" as="image" href="images/person_only_exact.webp" type="image/webp">
 
     <!-- Typography: 3 Families (Plus Jakarta Sans, JetBrains Mono, Caveat) -->
@@ -38,8 +39,16 @@
         href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="styles.css?v=20261020_paper_v2">
+    <link rel="stylesheet" href="styles.css?v=20261111_polish1">
+    <script>
+        (function () {
+            try {
+                var saved = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+            } catch (e) {}
+        })();
+    </script>
 </head>
 
 <body>
@@ -57,10 +66,10 @@
                 </a>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
                 <li><a href="#open-source">Open Source</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="mobile-only-cv"><a href="assets/Madhav_Kannan_K_CV.pdf" target="_blank" rel="noreferrer" download="Madhav_Kannan_K_CV.pdf"><i class="fas fa-file-arrow-down"></i> Download CV</a></li>
             </ul>
@@ -69,8 +78,20 @@
                     aria-label="Download Curriculum Vitae">
                     <i class="fas fa-file-arrow-down"></i> <span>Download CV</span>
                 </a>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle theme (T)">
+                    <svg class="theme-toggle__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path class="theme-toggle__body" d="M12 7a5 5 0 1 1 0 10a5 5 0 1 1 0-10z" />
+                        <g class="theme-toggle__rays">
+                            <line x1="12" y1="1.5" x2="12" y2="3.5" />
+                            <line x1="12" y1="20.5" x2="12" y2="22.5" />
+                            <line x1="1.5" y1="12" x2="3.5" y2="12" />
+                            <line x1="20.5" y1="12" x2="22.5" y2="12" />
+                            <line x1="4.58" y1="4.58" x2="6" y2="6" />
+                            <line x1="18" y1="18" x2="19.42" y2="19.42" />
+                            <line x1="4.58" y1="19.42" x2="6" y2="18" />
+                            <line x1="18" y1="6" x2="19.42" y2="4.58" />
+                        </g>
+                    </svg>
                 </button>
             </div>
             <div class="hamburger" id="hamburger" aria-label="Open mobile menu" role="button" tabindex="0">
@@ -86,8 +107,8 @@
         <section id="home" class="hero" aria-label="Introduction">
             <div class="hero-parallax-container">
                 <picture class="hero-layer hero-bg-layer" id="hero-bg-layer">
-                    <source srcset="images/chatgpt_landing_image.webp" type="image/webp">
-                    <img src="images/chatgpt_landing_image.png" alt="Hero Background Composition" width="1672" height="941"
+                    <source srcset="images/background_art.webp" type="image/webp">
+                    <img src="images/background_art.png" alt="Hero Background Composition" width="1672" height="941"
                         fetchpriority="high">
                 </picture>
                 <picture class="hero-layer hero-person-layer" id="hero-person-layer">
@@ -118,18 +139,13 @@
 
                     <h1 class="hero-title">Hi, I'm <span class="hero-name-highlight">Madhav Kannan&nbsp;K</span></h1>
                     <h2 class="hero-subtitle">MSc Data Science student<br>building ML systems</h2>
-                    <p class="hero-description">Building computer vision for infrastructure inspection, ML diagnostic prototypes, document search, and open-source tooling.</p>
+                    <p class="hero-description">Merged PR in google-ml-infra · Go port of jsbi validated with 9.7M differential fuzz cases</p>
 
                     <div class="hero-cta-group">
                         <a href="#projects" class="hero-cta-primary">View Projects</a>
                         <a href="#contact" class="hero-cta-secondary">Get In Touch</a>
                     </div>
                 </div>
-            </div>
-
-            <div class="scroll-hint">
-                <span>Scroll down</span>
-                <div class="scroll-hint-arrow"><i class="fas fa-chevron-down"></i></div>
             </div>
 
             <!-- Real irregular, fibrous torn-paper edge SVG transition filled with var(--paper) -->
@@ -140,80 +156,7 @@
             </div>
         </section>
 
-        <!-- SECTION A: ABOUT & SKILLS (#about) -->
-        <section id="about" class="editorial-section">
-            <div class="editorial-wrapper">
-                <div class="section-kicker-header">
-                    <span class="section-kicker">Background &amp; Competencies</span>
-                    <h2 class="section-heading">About &amp; Skills</h2>
-                </div>
-
-                <div class="about-grid">
-                    <!-- Left (7 cols): Bio as lead text, definition list -->
-                    <div class="about-left-col">
-                        <p class="lead-text">
-                            I am an MSc Data Science student at <strong>Coimbatore Institute of Technology (CIT)</strong>. My coursework and projects focus on machine learning modeling, computer vision, data pipelines, and developer tooling.
-                        </p>
-                        <p class="body-text about-paragraph-2">
-                            I focus on building practical systems: training defect segmentation models on infrastructure benchmarks, building semantic vector search over heterogeneous documents, and contributing upstream patches to open-source developer toolchains.
-                        </p>
-
-                        <!-- Plain Definition List: dt in mono, dd in body -->
-                        <dl class="about-def-list">
-                            <div class="def-row">
-                                <dt class="def-label">Education</dt>
-                                <dd class="def-value">
-                                    <strong>MSc Data Science</strong> · Coimbatore Institute of Technology · 2024-2029
-                                    <span class="handwritten-note about-script-note" aria-hidden="true">5-year integrated</span>
-                                </dd>
-                            </div>
-                            <div class="def-row">
-                                <dt class="def-label">Certification</dt>
-                                <dd class="def-value">
-                                    <strong>Mathematical Foundations of Machine Learning</strong> (IISc Bangalore, NPTEL) ·
-                                    <a href="assets/NOC26CS02S145050518304259951.pdf" target="_blank" rel="noreferrer" class="editorial-link">
-                                        View Certificate <i class="fas fa-arrow-up-right-from-square"></i>
-                                    </a>
-                                </dd>
-                            </div>
-                            <div class="def-row">
-                                <dt class="def-label">Languages</dt>
-                                <dd class="def-value">
-                                    English (Professional Working Proficiency), Malayalam (Native), Tamil (Native)
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
-
-                    <!-- Right (5 cols): Skills as four labeled groups, plain mono list with " / " separators. No boxes. -->
-                    <div class="about-right-col">
-                        <div class="skills-editorial-block">
-                            <div class="skill-group">
-                                <h3 class="skill-group-title">Programming</h3>
-                                <p class="skill-mono-list">Python / Go (Golang) / SQL</p>
-                            </div>
-
-                            <div class="skill-group">
-                                <h3 class="skill-group-title">Machine Learning &amp; CV</h3>
-                                <p class="skill-mono-list">PyTorch / scikit-learn / XGBoost / OpenCV / SHAP</p>
-                            </div>
-
-                            <div class="skill-group">
-                                <h3 class="skill-group-title">Backend &amp; Tooling</h3>
-                                <p class="skill-mono-list">FastAPI / Docker / Linux / Bash / Git &amp; GitHub</p>
-                            </div>
-
-                            <div class="skill-group">
-                                <h3 class="skill-group-title">Frontend &amp; UI</h3>
-                                <p class="skill-mono-list">React / JavaScript / HTML5 &amp; CSS3</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION B: OPEN SOURCE (#open-source) -->
+        <!-- SECTION A: OPEN SOURCE (#open-source) -->
         <section id="open-source" class="editorial-section">
             <div class="editorial-wrapper">
                 <div class="section-kicker-header">
@@ -221,65 +164,91 @@
                     <h2 class="section-heading">Open Source</h2>
                 </div>
 
-                <!-- Three full-width rows separated by 2px ink rules -->
-                <div class="os-rows-list">
-                    <!-- Row 1: rules_ml_toolchain (#322) -->
-                    <article class="os-editorial-row">
-                        <div class="os-numeral-col">
-                            <span class="big-numeral">#322</span>
-                        </div>
-                        <div class="os-content-col">
-                            <div class="os-header-meta">
-                                <span class="os-repo-name">google-ml-infra / rules_ml_toolchain</span>
-                                <span class="mono-status-badge merged">MERGED</span>
-                            </div>
-                            <h3 class="os-row-title">Windows Python Discovery &amp; Sequential Fallback Probing</h3>
-                            <p class="os-row-why">Fixed hermetic Bazel build initialization failures on Windows hosts where system Python is invoked as <code>python.exe</code> or via the <code>py</code> launcher rather than <code>python3</code>.</p>
-                            <p class="os-tools-line">Bazel / Starlark / Python Toolchain / Windows Runners</p>
-                            <a href="https://github.com/google-ml-infra/rules_ml_toolchain/pull/322" target="_blank" rel="noreferrer" class="editorial-link">
-                                View Merged PR #322 <i class="fas fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
-                    </article>
+                <div class="os-subgroups">
+                    <div class="os-subgroup">
+                        <h3 class="os-subgroup-title">Upstream contributions</h3>
+                        <div class="os-rows-list">
+                            <!-- Row 1: rules_ml_toolchain (#322) -->
+                            <article class="os-editorial-row">
+                                <div class="os-numeral-col">
+                                    <span class="big-numeral">#322</span>
+                                </div>
+                                <div class="os-content-col">
+                                    <div class="os-header-meta">
+                                        <span class="os-repo-name">google-ml-infra / rules_ml_toolchain</span>
+                                        <span class="mono-status-badge merged">MERGED</span>
+                                    </div>
+                                    <h4 class="os-row-title">Windows Python Discovery &amp; Sequential Fallback Probing</h4>
+                                    <p class="os-row-why">Fixed hermetic Bazel build initialization failures on Windows hosts where system Python is invoked as <code>python.exe</code> or via the <code>py</code> launcher rather than <code>python3</code>.</p>
+                                    <p class="os-tools-line">Bazel / Starlark / Python Toolchain / Windows Runners</p>
+                                    <a href="https://github.com/google-ml-infra/rules_ml_toolchain/pull/322" target="_blank" rel="noreferrer" class="editorial-link">
+                                        View Merged PR #322 <i class="fas fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </div>
+                            </article>
 
-                    <!-- Row 2: ollama-python (#769) -->
-                    <article class="os-editorial-row">
-                        <div class="os-numeral-col">
-                            <span class="big-numeral">#769</span>
+                            <!-- Row 2: ollama-python (#769) -->
+                            <article class="os-editorial-row">
+                                <div class="os-numeral-col">
+                                    <span class="big-numeral">#769</span>
+                                </div>
+                                <div class="os-content-col">
+                                    <div class="os-header-meta">
+                                        <span class="os-repo-name">ollama / ollama-python</span>
+                                        <span class="mono-status-badge open">OPEN</span>
+                                    </div>
+                                    <h4 class="os-row-title">Two-Way Tool Correlation &amp; ToolCall ID Preservation</h4>
+                                    <p class="os-row-why">Fixes dropped tool call results between Ollama's Go server backend and Python client by retaining correlation IDs during Pydantic serialization.</p>
+                                    <p class="os-tools-line">Python / Pydantic / Ollama SDK / Tool Calling</p>
+                                    <a href="https://github.com/ollama/ollama-python/pull/769" target="_blank" rel="noreferrer" class="editorial-link">
+                                        View Open PR #769 <i class="fas fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </div>
+                            </article>
                         </div>
-                        <div class="os-content-col">
-                            <div class="os-header-meta">
-                                <span class="os-repo-name">ollama / ollama-python</span>
-                                <span class="mono-status-badge open">OPEN</span>
-                            </div>
-                            <h3 class="os-row-title">Two-Way Tool Correlation &amp; ToolCall ID Preservation</h3>
-                            <p class="os-row-why">Fixes dropped tool call results between Ollama's Go server backend and Python client by retaining correlation IDs during Pydantic serialization.</p>
-                            <p class="os-tools-line">Python / Pydantic / Ollama SDK / Tool Calling</p>
-                            <a href="https://github.com/ollama/ollama-python/pull/769" target="_blank" rel="noreferrer" class="editorial-link">
-                                View Open PR #769 <i class="fas fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
-                    </article>
+                    </div>
 
-                    <!-- Row 3: fafa (OWN PROJECT) -->
-                    <article class="os-editorial-row">
-                        <div class="os-numeral-col">
-                            <span class="big-numeral">fafa</span>
+                    <div class="os-subgroup">
+                        <h3 class="os-subgroup-title">Own projects</h3>
+                        <div class="os-rows-list">
+                            <!-- Row 3: fafa (OWN PROJECT) -->
+                            <article class="os-editorial-row">
+                                <div class="os-numeral-col">
+                                    <span class="big-numeral">fafa</span>
+                                </div>
+                                <div class="os-content-col">
+                                    <div class="os-header-meta">
+                                        <span class="os-repo-name">Madhavkannank / fafa</span>
+                                        <span class="mono-status-badge own">OWN PROJECT</span>
+                                    </div>
+                                    <h4 class="os-row-title">Go Port of GoogleChromeLabs/jsbi (ECMAScript BigInt)</h4>
+                                    <p class="os-row-why">Go stdlib <code>math/big.Int</code> lacks ECMAScript BigInt semantics: it misses <code>NaN</code> relational guards and does not invert negative shift counts (<code>x &lt;&lt; -y == x &gt;&gt; y</code>). See the repository for other documented edge cases and the full 30-bit limb engine design.</p>
+                                    <div class="project-stats-grid">
+                                        <div class="stat-unit">
+                                            <span class="stat-number">9,696,250</span>
+                                            <span class="stat-label">Differential Fuzz Cases</span>
+                                        </div>
+                                        <div class="stat-unit">
+                                            <span class="stat-number">88.7%</span>
+                                            <span class="stat-label">Statement Coverage</span>
+                                        </div>
+                                        <div class="stat-unit">
+                                            <span class="stat-number">94.88 ns</span>
+                                            <span class="stat-label">Multiply (3-limb)</span>
+                                        </div>
+                                        <div class="stat-unit">
+                                            <span class="stat-number">304.9 ns</span>
+                                            <span class="stat-label">Divide (4×2-limb)</span>
+                                        </div>
+                                    </div>
+                                    <p class="os-tools-line">Go (Golang) / BigInt Arithmetic / Differential Fuzzing / V8 Equivalence</p>
+                                    <a href="https://github.com/Madhavkannank/fafa" target="_blank" rel="noreferrer" class="editorial-link">
+                                        View Repository &amp; Benchmarks <i class="fas fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </div>
+                            </article>
                         </div>
-                        <div class="os-content-col">
-                            <div class="os-header-meta">
-                                <span class="os-repo-name">Madhavkannank / fafa</span>
-                                <span class="mono-status-badge own">OWN PROJECT</span>
-                            </div>
-                            <h3 class="os-row-title">Go Port of GoogleChromeLabs/jsbi (ECMAScript BigInt)</h3>
-                            <p class="os-row-why">Go stdlib <code>math/big.Int</code> lacks ECMAScript BigInt semantics: it misses <code>NaN</code> relational guards and does not invert negative shift counts (<code>x &lt;&lt; -y == x &gt;&gt; y</code>). See the repository for other documented edge cases and the full 30-bit limb engine design.</p>
-                            <p class="os-metrics-line">9,696,250 differential fuzz cases (88.7% statement coverage) · Benchmarks: Multiply 94.88 ns (3-limb operands), Divide 304.9 ns (4-limb by 2-limb operands)</p>
-                            <p class="os-tools-line">Go (Golang) / BigInt Arithmetic / Differential Fuzzing / V8 Equivalence</p>
-                            <a href="https://github.com/Madhavkannank/fafa" target="_blank" rel="noreferrer" class="editorial-link">
-                                View Repository &amp; Benchmarks <i class="fas fa-arrow-up-right-from-square"></i>
-                            </a>
-                        </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
@@ -293,10 +262,12 @@
                 </div>
 
                 <div class="projects-editorial-list">
-                    <!-- Project 1: KCI (Image 8 cols on left, Text 4 cols on right) -->
+                    <!-- Project 1: KCI -->
                     <article class="project-editorial-row kci-row" id="project-kci">
                         <div class="project-media-col kci-media-col">
-                            <!-- Text-only giant outlined title filling the image columns -->
+                            <!-- Optional thumbnail when images/projects/kci.webp is added:
+                            <img src="images/projects/kci.webp" alt="KCI bridge defect segmentation preview" width="800" height="500" loading="lazy">
+                            -->
                             <div class="project-display-title" aria-hidden="true">KCI</div>
                         </div>
 
@@ -374,9 +345,12 @@
                                 </a>
                             </div>
 
-                            <!-- Keyboard-accessible <details> styled as simple "+ Architecture" row -->
+                            <!-- Keyboard-accessible <details> styled as full-width accordion row -->
                             <details class="arch-accordion">
-                                <summary class="arch-accordion-summary">+ Architecture Pipeline Deep Dive</summary>
+                                <summary class="arch-accordion-summary" aria-expanded="false">
+                                    <span>Architecture Pipeline Deep Dive</span>
+                                    <svg class="arch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </summary>
                                 <div class="arch-accordion-content">
                                     <div class="arch-step">
                                         <span class="arch-step-num">01</span>
@@ -404,10 +378,12 @@
                         </div>
                     </article>
 
-                    <!-- Project 2: GUIDO (Text 5 cols on left, Image 7 cols on right — alternating) -->
+                    <!-- Project 2: GUIDO -->
                     <article class="project-editorial-row reverse-row" id="project-guido">
                         <div class="project-media-col">
-                            <!-- Text-only giant outlined title filling the image columns -->
+                            <!-- Optional thumbnail when images/projects/guido.webp is added:
+                            <img src="images/projects/guido.webp" alt="GUIDO biomarker pipeline preview" width="800" height="500" loading="lazy">
+                            -->
                             <div class="project-display-title" aria-hidden="true">GUIDO</div>
                         </div>
 
@@ -444,7 +420,10 @@
                             </div>
 
                             <details class="arch-accordion">
-                                <summary class="arch-accordion-summary">+ Architecture Pipeline Deep Dive</summary>
+                                <summary class="arch-accordion-summary" aria-expanded="false">
+                                    <span>Architecture Pipeline Deep Dive</span>
+                                    <svg class="arch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </summary>
                                 <div class="arch-accordion-content">
                                     <div class="arch-step">
                                         <span class="arch-step-num">01</span>
@@ -472,10 +451,12 @@
                         </div>
                     </article>
 
-                    <!-- Project 3: AXEL (Image 7 cols on left, Text 5 cols on right — alternating) -->
+                    <!-- Project 3: AXEL -->
                     <article class="project-editorial-row" id="project-axel">
                         <div class="project-media-col">
-                            <!-- Text-only giant outlined title filling the image columns -->
+                            <!-- Optional thumbnail when images/projects/axel.webp is added:
+                            <img src="images/projects/axel.webp" alt="AXEL document search preview" width="800" height="500" loading="lazy">
+                            -->
                             <div class="project-display-title" aria-hidden="true">AXEL</div>
                         </div>
 
@@ -509,7 +490,10 @@
                             </div>
 
                             <details class="arch-accordion">
-                                <summary class="arch-accordion-summary">+ Architecture Pipeline Deep Dive</summary>
+                                <summary class="arch-accordion-summary" aria-expanded="false">
+                                    <span>Architecture Pipeline Deep Dive</span>
+                                    <svg class="arch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </summary>
                                 <div class="arch-accordion-content">
                                     <div class="arch-step">
                                         <span class="arch-step-num">01</span>
@@ -537,10 +521,12 @@
                         </div>
                     </article>
 
-                    <!-- Project 4: Jarvis Jr (Text 5 cols on left, Image 7 cols on right — alternating) -->
+                    <!-- Project 4: Jarvis Jr -->
                     <article class="project-editorial-row reverse-row" id="project-jarvis">
                         <div class="project-media-col">
-                            <!-- Text-only giant outlined title filling the image columns -->
+                            <!-- Optional thumbnail when images/projects/jarvis.webp is added:
+                            <img src="images/projects/jarvis.webp" alt="Jarvis Jr desktop assistant preview" width="800" height="500" loading="lazy">
+                            -->
                             <div class="project-display-title" aria-hidden="true">JARVIS JR</div>
                         </div>
 
@@ -582,7 +568,10 @@
                             </div>
 
                             <details class="arch-accordion">
-                                <summary class="arch-accordion-summary">+ Architecture Pipeline Deep Dive</summary>
+                                <summary class="arch-accordion-summary" aria-expanded="false">
+                                    <span>Architecture Pipeline Deep Dive</span>
+                                    <svg class="arch-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </summary>
                                 <div class="arch-accordion-content">
                                     <div class="arch-step">
                                         <span class="arch-step-num">01</span>
@@ -692,7 +681,7 @@
                             <h3 class="timeline-role-title">Joint Secretary</h3>
                             <p class="timeline-lead">Coordinate core operations, event logistics, and technical initiatives for the student open-source chapter.</p>
                             <ul class="timeline-bullets">
-                                <li>Organized a 3-day Linux workshop and framed the technical workshop syllabus for participating students.</li>
+                                <li>Organized a 3-day Linux workshop for ~100 participants covering Linux fundamentals, grading hands-on assignments and issuing completion certificates.</li>
                                 <li>Drive student engagement in regional FOSS initiatives, mentoring peers on version control standards, code reviews, and open-source licensing.</li>
                             </ul>
                         </div>
@@ -708,7 +697,7 @@
                             <h3 class="timeline-role-title">Technical Team Member &amp; Event Lead</h3>
                             <p class="timeline-lead">Organized technical event logistics, problem tracks, and automated evaluation pipelines for competitive student developer events.</p>
                             <ul class="timeline-bullets">
-                                <li><strong>Event Lead - Nakshathra 2026:</strong> Directed challenge logistics and flow across 4 simultaneous technical competitions on a single day for second-semester engineering students, introducing them to practical coding challenges.</li>
+                                <li><strong>Event Lead - Nakshathra 2026:</strong> Organized 4 simultaneous introductory coding competitions on a single day to introduce first-year engineering students to FOSS CIT.</li>
                             </ul>
 
                             <!-- Highlighted Entry: IGI Hackathon -->
@@ -716,6 +705,76 @@
                                 <span class="highlight-kicker">FEATURED EVENT LEAD</span>
                                 <h4 class="highlight-title">I'M GOING INN (IGI) Hackathon</h4>
                                 <p class="highlight-body">Led technical operations for a 2-day story-driven web application competition with 100+ participants, deploying an automated Gemini-assisted grading pipeline for submission evaluation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION E: ABOUT & SKILLS (#about) -->
+        <section id="about" class="editorial-section">
+            <div class="editorial-wrapper">
+                <div class="section-kicker-header">
+                    <span class="section-kicker">Background &amp; Competencies</span>
+                    <h2 class="section-heading">About &amp; Skills</h2>
+                </div>
+
+                <div class="about-grid">
+                    <!-- Left (7 cols): Trimmed ~3-line bio keeping facts, definition list -->
+                    <div class="about-left-col">
+                        <p class="lead-text">
+                            I am an MSc Data Science student at <strong>Coimbatore Institute of Technology (CIT)</strong>, building defect segmentation models on infrastructure benchmarks, semantic vector search over heterogeneous documents, and upstream patches for open-source developer toolchains.
+                        </p>
+
+                        <!-- Plain Definition List: dt in mono, dd in body -->
+                        <dl class="about-def-list">
+                            <div class="def-row">
+                                <dt class="def-label">Education</dt>
+                                <dd class="def-value">
+                                    <strong>MSc Data Science</strong> · Coimbatore Institute of Technology · 2024-2029
+                                    <span class="handwritten-note about-script-note" aria-hidden="true">5-year integrated</span>
+                                </dd>
+                            </div>
+                            <div class="def-row">
+                                <dt class="def-label">Certification</dt>
+                                <dd class="def-value">
+                                    <strong>Mathematical Foundations of Machine Learning</strong> (IISc Bangalore, NPTEL) ·
+                                    <a href="assets/NOC26CS02S145050518304259951.pdf" target="_blank" rel="noreferrer" class="editorial-link">
+                                        View Certificate <i class="fas fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </dd>
+                            </div>
+                            <div class="def-row">
+                                <dt class="def-label">Languages</dt>
+                                <dd class="def-value">
+                                    English (Professional Working Proficiency), Malayalam (Native), Tamil (Native)
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <!-- Right (5 cols): Skills as four labeled groups, plain mono list with " / " separators. No boxes. -->
+                    <div class="about-right-col">
+                        <div class="skills-editorial-block">
+                            <div class="skill-group">
+                                <h3 class="skill-group-title">Programming</h3>
+                                <p class="skill-mono-list">Python / Go (Golang) / SQL</p>
+                            </div>
+
+                            <div class="skill-group">
+                                <h3 class="skill-group-title">Machine Learning &amp; CV</h3>
+                                <p class="skill-mono-list">PyTorch / scikit-learn / XGBoost / OpenCV / SHAP</p>
+                            </div>
+
+                            <div class="skill-group">
+                                <h3 class="skill-group-title">Backend &amp; Tooling</h3>
+                                <p class="skill-mono-list">FastAPI / Docker / Linux / Bash / Git &amp; GitHub</p>
+                            </div>
+
+                            <div class="skill-group">
+                                <h3 class="skill-group-title">Frontend &amp; UI</h3>
+                                <p class="skill-mono-list">React / JavaScript / HTML5 &amp; CSS3</p>
                             </div>
                         </div>
                     </div>
@@ -733,11 +792,12 @@
 
                 <div class="contact-editorial-layout">
                     <p class="contact-internship-line">Open to machine learning and software engineering internships.</p>
+                    <p class="contact-email-note">Email me about internships, research collaborations, or open-source work.</p>
 
                     <!-- Huge clickable type with small Copy button beside it -->
                     <div class="contact-email-row">
-                        <a href="mailto:madhavkannank2903@gmail.com" class="contact-giant-email">hello@madhavkannank.me</a>
-                        <button class="copy-email-button" id="copyEmailBtn" data-email="madhavkannank2903@gmail.com" aria-label="Copy email address">
+                        <a href="mailto:hello@madhavkannank.me" class="contact-giant-email">hello@madhavkannank.me</a>
+                        <button class="copy-email-button" id="copyEmailBtn" data-email="hello@madhavkannank.me" aria-label="Copy email address">
                             <i class="fas fa-copy"></i> <span>Copy</span>
                         </button>
                     </div>
@@ -747,8 +807,8 @@
                         <a href="https://github.com/Madhavkannank" target="_blank" rel="noreferrer" class="contact-channel-link">
                             GitHub <span class="link-url-text">github.com/Madhavkannank</span> <i class="fas fa-arrow-up-right-from-square"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/madhav-kannan-k-9302a8311/" target="_blank" rel="noreferrer" class="contact-channel-link">
-                            LinkedIn <span class="link-url-text">linkedin.com/in/madhav-kannan-k-9302a8311</span> <i class="fas fa-arrow-up-right-from-square"></i>
+                        <a href="https://www.linkedin.com/in/madhav-kannan-k-cit/" target="_blank" rel="noreferrer" class="contact-channel-link">
+                            LinkedIn <span class="link-url-text">linkedin.com/in/madhav-kannan-k-cit</span> <i class="fas fa-arrow-up-right-from-square"></i>
                         </a>
                         <a href="https://www.instagram.com/maddy.clasher/" target="_blank" rel="noreferrer" class="contact-channel-link">
                             Instagram <span class="link-url-text">instagram.com/maddy.clasher</span> <i class="fas fa-arrow-up-right-from-square"></i>
@@ -773,7 +833,8 @@
     </div>
 
     <!-- Application Script -->
-    <script src="script.js?v=20261020_paper_v2"></script>
+    <script src="script.js?v=20261111_polish1"></script>
+    <script type="module" src="ink/main.js?v=20261111_polish1"></script>
 </body>
 
 </html>
